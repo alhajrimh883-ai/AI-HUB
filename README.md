@@ -29,7 +29,7 @@ Built around Wan 2.2 SVI Pro for long-form video (1 min+) with seamless end-fram
 ## Quick start
 
 ```bash
-git clone https://github.com/<you>/ai-hub.git
+git clone https://github.com/alhajrimh883-ai/AI-HUB.git
 cd ai-hub
 npm install
 npm run dev
