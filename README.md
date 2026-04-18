@@ -4,6 +4,39 @@ An Electron + React desktop app that orchestrates [ComfyUI](https://github.com/c
 
 Built around Wan 2.2 SVI Pro for long-form video (1 min+) with seamless end-frame continuation.
 
+## Screenshots
+
+### AI Director
+Autonomous T2I → I2V → Extend pipeline with planner review and per-segment LoRA selection.
+
+![AI Director](App%20images%20and%20demo/AI%20Director.png)
+
+### Studio
+Manual generation with preset-driven model + LoRA stacks, HireFix, and image-to-video.
+
+![Studio](App%20images%20and%20demo/STUDIO.png)
+
+### Chat
+VLM conversation with tool use — generates images inline, speaks responses aloud.
+
+![Chat](App%20images%20and%20demo/Chat.png)
+
+### Presets
+Sidebar-based preset management with descriptions, LoRA pools, and smart selection.
+
+![Presets](App%20images%20and%20demo/Presets.png)
+
+### Gallery
+Browse generated, imported, and Director project content.
+
+![Gallery](App%20images%20and%20demo/Gallery.png)
+
+### Demo video
+
+[▶ Watch the AI Director demo](App%20images%20and%20demo/AI%20Director%20Demo.mp4) — autonomous segment-by-segment generation in action.
+
+> GitHub renders the video inline once you click the link. To embed it as a player in this README, open the file on GitHub's web UI and drag-drop it into an edit of the README — GitHub will host it on `user-images.githubusercontent.com` and replace the link with a `<video>` block.
+
 ## Features
 
 - **Studio** — manual text-to-image with SDXL and Qwen families, per-preset LoRA stacks, HireFix upscaling, image-to-video animation
@@ -17,7 +50,7 @@ Built around Wan 2.2 SVI Pro for long-form video (1 min+) with seamless end-fram
 
 - Electron 28 + React 18 + Vite 5 + Tailwind 3 + Zustand
 - Python FastAPI servers for VLM (llama-cpp-python) and Voice (Whisper.cpp + Piper/Kokoro)
-- Vitest for unit tests (201 tests across 14 files)
+- Vitest for unit tests (226 tests across 15 files)
 
 ## Prerequisites
 
@@ -80,7 +113,7 @@ The wizard runs once on first launch. To run it again (e.g. to reconfigure paths
 npm test
 ```
 
-201 tests covering workflow builders, preset resolution, smart-select, chat pipeline, Director segment planning, voice store, VLM auto-optimize profiles, and the first-run installer.
+226 tests covering workflow builders, preset resolution, smart-select, chat pipeline, Director segment planning, voice store, VLM auto-optimize profiles, and the first-run installer.
 
 ## License
 
