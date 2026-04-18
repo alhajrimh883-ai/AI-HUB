@@ -1,0 +1,98 @@
+{
+  "60": {
+    "inputs": {
+      "filename_prefix": "Creator_Qwen",
+      "images": ["95", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": { "title": "Save Image" }
+  },
+  "88": {
+    "inputs": {
+      "vae_name": ""
+    },
+    "class_type": "VAELoader",
+    "_meta": { "title": "Load VAE" }
+  },
+  "89": {
+    "inputs": {
+      "clip_name": "",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": { "title": "Load CLIP" }
+  },
+  "90": {
+    "inputs": {
+      "width": 1328,
+      "height": 1328,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": { "title": "EmptySD3LatentImage" }
+  },
+  "91": {
+    "inputs": {
+      "shift": 3.1,
+      "model": ["92", 0]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": { "title": "ModelSamplingAuraFlow" }
+  },
+  "92": {
+    "inputs": {
+      "unet_name": "",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": { "title": "Load Diffusion Model" }
+  },
+  "93": {
+    "inputs": {
+      "text": "",
+      "clip": ["89", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "CLIP Text Encode (Positive Prompt)" }
+  },
+  "94": {
+    "inputs": {
+      "text": "",
+      "clip": ["89", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": { "title": "CLIP Text Encode (Negative Prompt)" }
+  },
+  "95": {
+    "inputs": {
+      "samples": ["97", 0],
+      "vae": ["88", 0]
+    },
+    "class_type": "VAEDecode",
+    "_meta": { "title": "VAE Decode" }
+  },
+  "97": {
+    "inputs": {
+      "seed": ["108", 0],
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["91", 0],
+      "positive": ["93", 0],
+      "negative": ["94", 0],
+      "latent_image": ["90", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": { "title": "KSampler" }
+  },
+  "108": {
+    "inputs": {
+      "seed": -1
+    },
+    "class_type": "Seed (rgthree)",
+    "_meta": { "title": "Seed (rgthree)" }
+  }
+}

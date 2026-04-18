@@ -1,0 +1,56 @@
+{
+  "1": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "2": {
+    "inputs": {
+      "pixels": [
+        "3",
+        0
+      ],
+      "vae": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "3": {
+    "inputs": {
+      "video": "ComfyUI_00002_.mp4",
+      "force_rate": 0,
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1,
+      "format": "AnimateDiff"
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video (Upload) 🎥🅥🅗🅢"
+    }
+  },
+  "4": {
+    "inputs": {
+      "filename_prefix": "latents/ComfyUI",
+      "samples": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "SaveLatent",
+    "_meta": {
+      "title": "SaveLatent"
+    }
+  }
+}

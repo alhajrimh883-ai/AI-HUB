@@ -1,0 +1,401 @@
+{
+  "78": {
+    "inputs": {
+      "image": "image_qwen_image_edit_2509_input_image.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "342": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "494",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "470": {
+    "inputs": {
+      "strength": 1,
+      "model": [
+        "472",
+        0
+      ]
+    },
+    "class_type": "CFGNorm",
+    "_meta": {
+      "title": "CFGNorm"
+    }
+  },
+  "471": {
+    "inputs": {
+      "prompt": "",
+      "clip": [
+        "482",
+        0
+      ],
+      "vae": [
+        "483",
+        0
+      ],
+      "image1": [
+        "476",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "TextEncodeQwenImageEditPlus"
+    }
+  },
+  "472": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "481",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "473": {
+    "inputs": {
+      "prompt": "",
+      "clip": [
+        "482",
+        0
+      ],
+      "vae": [
+        "483",
+        0
+      ],
+      "image1": [
+        "476",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "TextEncodeQwenImageEditPlus"
+    }
+  },
+  "474": {
+    "inputs": {
+      "pixels": [
+        "476",
+        0
+      ],
+      "vae": [
+        "483",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "475": {
+    "inputs": {
+      "samples": [
+        "484",
+        0
+      ],
+      "vae": [
+        "483",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "476": {
+    "inputs": {
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "FluxKontextImageScale",
+    "_meta": {
+      "title": "FluxKontextImageScale"
+    }
+  },
+  "477": {
+    "inputs": {
+      "value": 20
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "478": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "479": {
+    "inputs": {
+      "conditioning": [
+        "473",
+        0
+      ],
+      "latent": [
+        "474",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  },
+  "480": {
+    "inputs": {
+      "conditioning": [
+        "471",
+        0
+      ],
+      "latent": [
+        "474",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  },
+  "481": {
+    "inputs": {
+      "ckpt_name": "Qwen Edit\\qwen_image_edit_2509_fp8_e4m3fn.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "482": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "483": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "484": {
+    "inputs": {
+      "seed": 1001672099958606,
+      "steps": [
+        "477",
+        0
+      ],
+      "cfg": [
+        "478",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 0.5,
+      "model": [
+        "470",
+        0
+      ],
+      "positive": [
+        "479",
+        0
+      ],
+      "negative": [
+        "480",
+        0
+      ],
+      "latent_image": [
+        "474",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "485": {
+    "inputs": {
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "🔧 Get Image Size"
+    }
+  },
+  "486": {
+    "inputs": {
+      "a": [
+        "485",
+        0
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "487": {
+    "inputs": {
+      "a": [
+        "485",
+        1
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "488": {
+    "inputs": {
+      "a": [
+        "486",
+        0
+      ],
+      "b": [
+        "492",
+        0
+      ],
+      "operation": "multiply"
+    },
+    "class_type": "easy mathFloat",
+    "_meta": {
+      "title": "Math Float"
+    }
+  },
+  "489": {
+    "inputs": {
+      "a": [
+        "487",
+        0
+      ],
+      "b": [
+        "492",
+        0
+      ],
+      "operation": "multiply"
+    },
+    "class_type": "easy mathFloat",
+    "_meta": {
+      "title": "Math Float"
+    }
+  },
+  "490": {
+    "inputs": {
+      "a": [
+        "488",
+        0
+      ]
+    },
+    "class_type": "CM_FloatToInt",
+    "_meta": {
+      "title": "FloatToInt"
+    }
+  },
+  "491": {
+    "inputs": {
+      "a": [
+        "489",
+        0
+      ]
+    },
+    "class_type": "CM_FloatToInt",
+    "_meta": {
+      "title": "FloatToInt"
+    }
+  },
+  "492": {
+    "inputs": {
+      "value": 1.5
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "Upscale Image by"
+    }
+  },
+  "493": {
+    "inputs": {
+      "upscale_model": [
+        "495",
+        0
+      ],
+      "image": [
+        "475",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "494": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": [
+        "490",
+        0
+      ],
+      "height": [
+        "491",
+        0
+      ],
+      "crop": "disabled",
+      "image": [
+        "493",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "495": {
+    "inputs": {
+      "model_name": "RealESRGAN_x4plus_anime_6B.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "1": {
+    "inputs": {
+      "width": [
+        "94",
+        0
+      ],
+      "height": [
+        "94",
+        1
+      ],
+      "length": [
+        "106",
+        0
+      ],
+      "batch_size": 1,
+      "motion_frames": [
+        "110",
+        0
+      ],
+      "motion_amplitude": 1.15,
+      "positive": [
+        "9",
+        0
+      ],
+      "negative": [
+        "8",
+        0
+      ],
+      "vae": [
+        "7",
+        0
+      ],
+      "previous_video": [
+        "2",
+        0
+      ],
+      "initial_reference_image": [
+        "200",
+        0
+      ],
+      "start_image": [
+        "4",
+        0
+      ],
+      "end_image": [
+        "200",
+        0
+      ]
+    },
+    "class_type": "PainterLongVideo",
+    "_meta": {
+      "title": "PainterLongVideo"
+    }
+  },
+  "2": {
+    "inputs": {
+      "video": "ComfyUI_00002_.mp4",
+      "force_rate": 0,
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1,
+      "format": "AnimateDiff"
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video (Upload) 🎥🅥🅗🅢"
+    }
+  },
+  "4": {
+    "inputs": {
+      "from_direction": "end",
+      "count": 1,
+      "image": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "Pick From Batch (mtb)",
+    "_meta": {
+      "title": "Pick From Batch (mtb)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "8": {
+    "inputs": {
+      "text": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走",
+      "clip": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negtive prompt"
+    }
+  },
+  "9": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Postive prompt"
+    }
+  },
+  "10": {
+    "inputs": {
+      "clip_name": "nsfw_wan_umt5-xxl_fp8_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "94": {
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "🔧 Get Image Size"
+    }
+  },
+  "95": {
+    "inputs": {
+      "shift": 8,
+      "model": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "96": {
+    "inputs": {
+      "shift": 8,
+      "model": [
+        "97",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "97": {
+    "inputs": {
+      "nag_scale": 11,
+      "nag_alpha": 0.25,
+      "nag_tau": 2.5,
+      "input_type": "default",
+      "model": [
+        "99",
+        0
+      ],
+      "conditioning": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "WanVideoNAG",
+    "_meta": {
+      "title": "WanVideoNAG"
+    }
+  },
+  "98": {
+    "inputs": {
+      "nag_scale": 11,
+      "nag_alpha": 0.25,
+      "nag_tau": 2.5,
+      "input_type": "default",
+      "model": [
+        "100",
+        0
+      ],
+      "conditioning": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "WanVideoNAG",
+    "_meta": {
+      "title": "WanVideoNAG"
+    }
+  },
+  "99": {
+    "inputs": {
+      "ckpt_name": "Fast Wan Models\\wan22EnhancedNSFWCameraPrompt_nsfwFASTMOVEV2FP8H.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "High Wan model"
+    }
+  },
+  "100": {
+    "inputs": {
+      "ckpt_name": "Fast Wan Models\\wan22EnhancedNSFWCameraPrompt_nsfwFASTMOVEV2FP8L.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Low Wan model"
+    }
+  },
+  "101": {
+    "inputs": {
+      "fps": [
+        "102",
+        0
+      ],
+      "images": [
+        "201",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "102": {
+    "inputs": {
+      "a": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "103": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": 461826283466269,
+      "steps": [
+        "111",
+        0
+      ],
+      "cfg": [
+        "112",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": [
+        "108",
+        0
+      ],
+      "end_at_step": [
+        "111",
+        0
+      ],
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "95",
+        0
+      ],
+      "positive": [
+        "1",
+        0
+      ],
+      "negative": [
+        "1",
+        1
+      ],
+      "latent_image": [
+        "104",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "104": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 460424237747415,
+      "steps": [
+        "111",
+        0
+      ],
+      "cfg": [
+        "112",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": [
+        "108",
+        0
+      ],
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "96",
+        0
+      ],
+      "positive": [
+        "1",
+        0
+      ],
+      "negative": [
+        "1",
+        1
+      ],
+      "latent_image": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "105": {
+    "inputs": {
+      "samples": [
+        "103",
+        0
+      ],
+      "vae": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "106": {
+    "inputs": {
+      "a": [
+        "107",
+        0
+      ],
+      "b": 1,
+      "operation": "add"
+    },
+    "class_type": "easy mathInt",
+    "_meta": {
+      "title": "Math Int"
+    }
+  },
+  "107": {
+    "inputs": {
+      "a": [
+        "110",
+        0
+      ],
+      "b": [
+        "109",
+        0
+      ],
+      "operation": "multiply"
+    },
+    "class_type": "easy mathInt",
+    "_meta": {
+      "title": "Math Int"
+    }
+  },
+  "108": {
+    "inputs": {
+      "a": [
+        "111",
+        0
+      ],
+      "b": 2,
+      "operation": "divide"
+    },
+    "class_type": "easy mathInt",
+    "_meta": {
+      "title": "Math Int"
+    }
+  },
+  "109": {
+    "inputs": {
+      "value": 5
+    },
+    "class_type": "easy int",
+    "_meta": {
+      "title": "Duration in seconds"
+    }
+  },
+  "110": {
+    "inputs": {
+      "value": 16
+    },
+    "class_type": "easy int",
+    "_meta": {
+      "title": "FPS"
+    }
+  },
+  "111": {
+    "inputs": {
+      "Total Steps": 4
+    },
+    "class_type": "Total Steps",
+    "_meta": {
+      "title": "Total Steps"
+    }
+  },
+  "112": {
+    "inputs": {
+      "CFG": 1
+    },
+    "class_type": "CFG",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "114": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video": [
+        "101",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video"
+    }
+  },
+  "200": {
+    "inputs": {
+      "image": "original_frame.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Original Image (reset target)"
+    }
+  },
+  "201": {
+    "inputs": {
+      "from_direction": "end",
+      "count": 80,
+      "image": [
+        "105",
+        0
+      ]
+    },
+    "class_type": "Pick From Batch (mtb)",
+    "_meta": {
+      "title": "Pick From Batch (mtb)"
+    }
+  }
+}

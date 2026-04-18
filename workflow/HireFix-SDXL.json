@@ -1,0 +1,271 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 585483408983215,
+      "steps": 20,
+      "cfg": 4.01,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.5,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "40",
+        0
+      ],
+      "latent_image": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "iIllustrious\\nova3DCGXL_ilV90.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "59",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "40": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "55": {
+    "inputs": {
+      "image": "(1).png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "56": {
+    "inputs": {
+      "pixels": [
+        "55",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "57": {
+    "inputs": {
+      "upscale_model": [
+        "60",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "59": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": [
+        "71",
+        0
+      ],
+      "height": [
+        "72",
+        0
+      ],
+      "crop": "disabled",
+      "image": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "60": {
+    "inputs": {
+      "model_name": "RealESRGAN_x4plus_anime_6B.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "61": {
+    "inputs": {
+      "image": [
+        "55",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "🔧 Get Image Size"
+    }
+  },
+  "65": {
+    "inputs": {
+      "a": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "66": {
+    "inputs": {
+      "a": [
+        "65",
+        0
+      ],
+      "b": [
+        "69",
+        0
+      ],
+      "operation": "multiply"
+    },
+    "class_type": "easy mathFloat",
+    "_meta": {
+      "title": "Math Float"
+    }
+  },
+  "67": {
+    "inputs": {
+      "a": [
+        "61",
+        1
+      ]
+    },
+    "class_type": "CM_IntToFloat",
+    "_meta": {
+      "title": "IntToFloat"
+    }
+  },
+  "68": {
+    "inputs": {
+      "a": [
+        "67",
+        0
+      ],
+      "b": [
+        "69",
+        0
+      ],
+      "operation": "multiply"
+    },
+    "class_type": "easy mathFloat",
+    "_meta": {
+      "title": "Math Float"
+    }
+  },
+  "69": {
+    "inputs": {
+      "value": 1.5
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "Upscale Image by"
+    }
+  },
+  "71": {
+    "inputs": {
+      "a": [
+        "66",
+        0
+      ]
+    },
+    "class_type": "CM_FloatToInt",
+    "_meta": {
+      "title": "FloatToInt"
+    }
+  },
+  "72": {
+    "inputs": {
+      "a": [
+        "68",
+        0
+      ]
+    },
+    "class_type": "CM_FloatToInt",
+    "_meta": {
+      "title": "FloatToInt"
+    }
+  }
+}

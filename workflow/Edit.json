@@ -1,0 +1,432 @@
+{
+  "60": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "483",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "78": {
+    "inputs": {
+      "image": "image_qwen_image_edit_2509_input_image.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "480": {
+    "inputs": {
+      "image": "image_qwen_image_edit_2509_input_image.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load image2 (optional)"
+    }
+  },
+  "481": {
+    "inputs": {
+      "image": "image_qwen_image_edit_2509_input_image.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load image3 (optional)"
+    }
+  },
+  "482": {
+    "inputs": {
+      "pixels": [
+        "484",
+        0
+      ],
+      "vae": [
+        "489",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "483": {
+    "inputs": {
+      "samples": [
+        "492",
+        0
+      ],
+      "vae": [
+        "489",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "484": {
+    "inputs": {
+      "image": [
+        "501",
+        0
+      ]
+    },
+    "class_type": "FluxKontextImageScale",
+    "_meta": {
+      "title": "FluxKontextImageScale"
+    }
+  },
+  "485": {
+    "inputs": {
+      "value": 20
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "486": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "487": {
+    "inputs": {
+      "ckpt_name": "Qwen Edit\\qwen_image_edit_2509_fp8_e4m3fn.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "488": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "489": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "490": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "487",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "491": {
+    "inputs": {
+      "strength": 1,
+      "model": [
+        "490",
+        0
+      ]
+    },
+    "class_type": "CFGNorm",
+    "_meta": {
+      "title": "CFGNorm"
+    }
+  },
+  "492": {
+    "inputs": {
+      "seed": 973414316252139,
+      "steps": [
+        "485",
+        0
+      ],
+      "cfg": [
+        "486",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "491",
+        0
+      ],
+      "positive": [
+        "502",
+        0
+      ],
+      "negative": [
+        "503",
+        0
+      ],
+      "latent_image": [
+        "482",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "493": {
+    "inputs": {
+      "width": 832,
+      "height": 480,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "landscape"
+    }
+  },
+  "494": {
+    "inputs": {
+      "width": 640,
+      "height": 640,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "square"
+    }
+  },
+  "495": {
+    "inputs": {
+      "width": 480,
+      "height": 832,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Portrait"
+    }
+  },
+  "496": {
+    "inputs": {
+      "width": 1280,
+      "height": 720,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "landscape"
+    }
+  },
+  "497": {
+    "inputs": {
+      "width": 832,
+      "height": 832,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "square"
+    }
+  },
+  "498": {
+    "inputs": {
+      "width": 720,
+      "height": 1280,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 2,
+      "device": "cpu",
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Portrait"
+    }
+  },
+  "499": {
+    "inputs": {
+      "selection_setting": 2,
+      "input_1": [
+        "495",
+        0
+      ],
+      "input_2": [
+        "494",
+        0
+      ],
+      "input_3": [
+        "493",
+        0
+      ]
+    },
+    "class_type": "ThreeWaySwitch",
+    "_meta": {
+      "title": "Switch (Three Way)"
+    }
+  },
+  "500": {
+    "inputs": {
+      "selection_setting": 2,
+      "input_1": [
+        "498",
+        0
+      ],
+      "input_2": [
+        "497",
+        0
+      ],
+      "input_3": [
+        "496",
+        0
+      ]
+    },
+    "class_type": "ThreeWaySwitch",
+    "_meta": {
+      "title": "Switch (Three Way)"
+    }
+  },
+  "501": {
+    "inputs": {
+      "switch": false,
+      "on_false": [
+        "499",
+        0
+      ],
+      "on_true": [
+        "500",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "480p = False, 720p = true"
+    }
+  },
+  "502": {
+    "inputs": {
+      "prompt": "",
+      "clip": [
+        "488",
+        0
+      ],
+      "vae": [
+        "489",
+        0
+      ],
+      "image1": [
+        "484",
+        0
+      ],
+      "image2": [
+        "480",
+        0
+      ],
+      "image3": [
+        "481",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "TextEncodeQwenImageEditPlus (postive)"
+    }
+  },
+  "503": {
+    "inputs": {
+      "prompt": "",
+      "clip": [
+        "488",
+        0
+      ],
+      "vae": [
+        "489",
+        0
+      ],
+      "image1": [
+        "484",
+        0
+      ],
+      "image2": [
+        "480",
+        0
+      ],
+      "image3": [
+        "481",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "TextEncodeQwenImageEditPlus (negtive)"
+    }
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "5": {
+    "inputs": {
+      "ckpt_name": "nova3DCGXL_ilV90.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "7": {
+    "inputs": {
+      "seed": [
+        "123",
+        0
+      ],
+      "steps": [
+        "122",
+        0
+      ],
+      "cfg": [
+        "121",
+        0
+      ],
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "5",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "latent_image": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "8": {
+    "inputs": {
+      "text": "1girl, solo, opera, dancing",
+      "clip": [
+        "5",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "5",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "15": {
+    "inputs": {
+      "anything": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean VRAM Used"
+    }
+  },
+  "18": {
+    "inputs": {
+      "text": "extra digits, (particles, adversarial_noise:1.2), multiple views, multiple angle, split view, grid view, two shot, outside border, picture frame, framed, border, letterboxed, pillarboxed, 2koma, modern, recent, old, oldest, cartoon, graphic, text, painting, crayon, graphite, abstract, glitch, deformed, mutated, ugly, disfigured, long body, lowres, bad anatomy, bad hands, missing fingers, extra fingers, extra digits, fewer digits, cropped, very displeasing, (worst quality, bad quality:1.2), sketch, jpeg artifacts, signature, watermark, username, (censored, bar_censor, mosaic_censor:1.2), simple background, conjoined, bad ai-generated",
+      "clip": [
+        "5",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "36": {
+    "inputs": {
+      "width": 832,
+      "height": 1216,
+      "batch_size": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "Portrait"
+    }
+  },
+  "37": {
+    "inputs": {
+      "width": 1216,
+      "height": 832,
+      "batch_size": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "Landscape"
+    }
+  },
+  "38": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "Square"
+    }
+  },
+  "39": {
+    "inputs": {
+      "selection_setting": 3,
+      "input_1": [
+        "38",
+        0
+      ],
+      "input_2": [
+        "37",
+        0
+      ],
+      "input_3": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "ThreeWaySwitch",
+    "_meta": {
+      "title": "Ratio"
+    }
+  },
+  "103": {
+    "inputs": {
+      "images": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "121": {
+    "inputs": {
+      "value": 5
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "122": {
+    "inputs": {
+      "value": 15
+    },
+    "class_type": "easy int",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "123": {
+    "inputs": {
+      "value": 0
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "127": {
+    "inputs": {
+      "value": 0
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Batch_Size"
+    }
+  }
+}

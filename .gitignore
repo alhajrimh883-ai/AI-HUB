@@ -1,0 +1,54 @@
+# ── Node / build ─────────────────────────────────────────────────
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Python venvs + caches ────────────────────────────────────────
+vlm_venv/
+voice_venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# ── Bundled binaries / wheels (too large for git) ────────────────
+*.whl
+*.gguf
+*.onnx
+*.bin
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# ── User data (generated at runtime) ─────────────────────────────
+output/
+models_voice/
+sessions/
+settings.json
+*.sqlite
+*.db
+
+# ── Editor / OS ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Electron build output ────────────────────────────────────────
+release/
+out/
+build/
+
+# ── Env / secrets ────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local

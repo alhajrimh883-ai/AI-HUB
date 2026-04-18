@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-HUB — Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #040405; color: #e0e0e8; }
+  .header { background: linear-gradient(135deg, #0a0a0c 0%, #111114 100%); border-bottom: 1px solid #222228; padding: 20px 32px; }
+  .header h1 { font-size: 20px; font-weight: 700; color: #f0f0ff; }
+  .header span { font-size: 12px; color: #555; }
+  .tabs { display: flex; gap: 0; background: #0a0a0c; border-bottom: 1px solid #222228; padding: 0 32px; position: sticky; top: 0; z-index: 10; }
+  .tab { padding: 12px 24px; font-size: 13px; font-weight: 600; cursor: pointer; color: #555; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .tab:hover { color: #999; }
+  .tab.active { color: #7c5bf0; border-bottom-color: #7c5bf0; }
+  .content { max-width: 900px; margin: 0 auto; padding: 32px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .md h1 { font-size: 24px; font-weight: 800; color: #f0f0ff; margin: 28px 0 12px; border-bottom: 1px solid #222228; padding-bottom: 8px; }
+  .md h1:first-child { margin-top: 0; }
+  .md h2 { font-size: 18px; font-weight: 700; color: #c4b5fd; margin: 24px 0 8px; }
+  .md h3 { font-size: 15px; font-weight: 600; color: #93c5fd; margin: 16px 0 6px; }
+  .md h4 { font-size: 13px; font-weight: 600; color: #86efac; margin: 12px 0 4px; }
+  .md p { font-size: 14px; line-height: 1.7; color: #b0b0c0; margin: 6px 0; }
+  .md ul, .md ol { padding-left: 24px; margin: 6px 0; }
+  .md li { font-size: 14px; line-height: 1.7; color: #b0b0c0; margin: 3px 0; }
+  .md strong { color: #e0e0f0; }
+  .md code { background: #111114; color: #c4b5fd; padding: 2px 6px; border-radius: 4px; font-family: 'Cascadia Code', monospace; font-size: 12px; }
+  .md pre { background: #0a0a0c; border: 1px solid #222228; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 10px 0; }
+  .md pre code { background: none; padding: 0; font-size: 12px; line-height: 1.6; color: #a0a0b8; }
+  .md table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  .md th { background: #111114; color: #c4b5fd; padding: 6px 10px; text-align: left; font-size: 12px; border: 1px solid #222228; }
+  .md td { padding: 6px 10px; font-size: 13px; color: #b0b0c0; border: 1px solid #111114; }
+  .md hr { border: none; border-top: 1px solid #222228; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="header"><h1>AI-HUB</h1><span>Documentation — April 2026</span></div>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('current',this)">Current App</div>
+  <div class="tab" onclick="switchTab('plan',this)">Features Plan</div>
+</div>
+<div class="content">
+  <div id="current" class="panel active md"></div>
+  <div id="plan" class="panel md"></div>
+</div>
+<script>
+function switchTab(id,el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+const CURRENT_MD = `
+# AI-HUB — Current App
+
+## Overview
+Electron + React + Vite + Tailwind desktop app orchestrating ComfyUI for AI image/video generation. Dark space theme with starfield background.
+
+---
+
+## Tabs
+
+### 1. Studio (T2I Image Generation)
+- Text-to-image generation via ComfyUI
+- **Preset-based**: checkpoint, LoRAs, steps, cfg, negative prompt all from preset
+- Mode toggle: Fast / Quality — filters presets
+- User LoRA panel with strength control
+- Resolution presets: portrait, square, landscape (random + sequential modes)
+- Batch generation (1/2/4/6)
+- Session system — create, rename, favorite, delete
+- Auto-expanding floating glass prompt bar over starfield background
+- **Clean image grid** — no action buttons, just images with hover glow. Click opens ImageOverlay
+
+#### ImageOverlay (click any image)
+- Zoom/pan, metadata display, lineage tree (root + variants)
+- **Edit panel** — Qwen Edit workflow via preset, resolution + HD toggle
+- **HireFix panel** — Qwen or SDXL workflow via preset
+  - SDXL: one-click enhance (model/CFG/prompts from image metadata, backup T2I preset)
+  - Qwen: Auto/Manual prompt modes (negative only in Quality mode)
+- **Animate panel** — VLM modes: Off (manual), Guided (user directs VLM), Auto (full auto)
+  - VLM Auto-Animate toggle — skip preview, generate immediately
+  - Guided/Auto disabled when no VLM preset selected
+- **Unified delete** — same trash icon on root and variants
+  - Root with variants: promotes next variant (merged metadata)
+  - Root without variants: deletes entire package
+  - Respects "skip delete confirmation" setting
+- **Separate prompt states** — edit, animate, and hires prompts are independent
+- Save/download button
+
+### 2. AI Director (Autonomous Video Pipeline)
+- Generates long-form AI video autonomously
+- Mode toggle: Fast / Quality
+- Image + Video preset dropdowns (unified or separate I2V + Extend)
+- Required model validation before generation
+
+#### Pipeline: Planner > LoRA Scan > T2I > Body Fix > HireFix > I2V > Extend xN > Review
+
+#### Director Settings
+- Target length, segment duration
+- **Motion Latent Count** — SVI PRO motion context (no upper limit, default 4)
+- **Overlap Frames** — stitch blending between segments (no upper limit, default 5)
+- Resolution (portrait/square/landscape), HD toggle
+- Camera/lighting control, auto-approve, planner, body fix, hires fix toggles
+
+#### Extend Workflow
+- Dual frame anchoring: first + last frame via ImageBatchMulti > VAEEncode > anchor
+- SaveLatent + CreateVideo + SaveVideo (WebSocket capture)
+
+### 3. Presets
+Universal preset system for all model configuration.
+
+#### Types and Families
+- Text to Image: SDXL
+- Video: Wan 2.2 (unified) or Wan 2.2 I2V + SVIPRO (separate)
+- Edit: Qwen (Edit) — extensible for more workflows
+- HireFix: Qwen (HireFix) or SDXL (HireFix)
+- VLM: Model + context + image tokens
+
+#### Per-workflow field/settings visibility
+- SDXL HireFix: no model fields (backup T2I preset), steps only
+- Qwen HireFix: checkpoint/clip/vae + steps/cfg/shift
+- VLM: no family/mode/steps/cfg/loras — just model paths + context + image tokens
+
+#### Modes: Fast, Quality, Both
+
+#### Shared HireFix settings: denoise, upscaleBy, upscaleModel (standard NOT latent)
+#### Dual LoRA support for Wan 2.2 (HIGH/LOW with separate strengths)
+
+### 4. Gallery
+Browse generated images/videos
+
+### 5. Settings (App Management)
+- ComfyUI path, launcher, output directory, connection status
+- Notifications: toast toggle, skip delete confirmation toggle
+- VLM Setup: system detection, install/reinstall, auto-optimize
+  - VRAM management: unload / park in RAM / keep in VRAM
+  - Video analysis: single frame / multi-frame + target frames
+- ComfyUI model counts, About
+
+---
+
+## Header Bar
+- VLM preset dropdown — app-wide, green when set, amber when missing
+- No VLM: Guided/Auto animate disabled, Director VLM calls check enabled flag
+- Model refresh: auto 30s + manual button
+
+---
+
+## Architecture
+
+### VLM Tools (src/lib/vlm-tools/)
+Plugin architecture — tools are isolated modules.
+- index.js — registry + runTool() dispatcher
+- imageToVideo.js — image to VLM to video prompt (Studio animate)
+- videoAnalysis.js — frame extraction + content building (Director extend)
+- bodyAnalysis.js — anatomical issue detection (Director body fix)
+
+### Workflow Builders
+- sviproWorkflow.js — buildI2V() + buildExtend()
+- studioWorkflow.js — buildT2I() + buildHireFix() (old SDXL)
+- editWorkflow.js — buildEdit() + buildHirefixQwen() + buildHirefixSdxl()
+- editorWorkflow.js — buildEditorOverlay() (legacy)
+
+### Workflow Files
+- I2V.json — PainterI2VAdvanced
+- Extend.json — WanImageToVideoSVIPro (dual frame anchor)
+- T2I.json — SDXL text-to-image
+- Edit.json — Qwen Edit (dynamic image2/image3 removal)
+- HireFix-Qwen.json — Qwen HireFix + upscale chain
+- HireFix-SDXL.json — SDXL HireFix (metadata fallback)
+
+### Stores
+- presetStore.js — presets, required models, VLM config resolver (getVlmConfig)
+- store.js — ComfyUI connection, scanned models, generation state
+- studioStore.js — Studio settings
+- directorStore.js — Director state (pipeline, templates, timing, motion latent, overlap)
+- sessionStore.js — Session/package management
+
+### Theme
+Pure black (bg-900: #040405) with CSS starfield, floating glass prompt bar, gradient accent buttons.
+
+### Tech Stack
+Electron, React, Vite, Tailwind, Zustand, ComfyUI, llama-cpp-python, lucide-react
+`;
+const PLAN_MD = `
+# AI-HUB — Features Plan
+## Removed/Deferred Features for Future Re-implementation
+
+---
+
+## Current Architecture (Keeping)
+- **Studio Tab** — T2I image generation (FLUX/Wan checkpoints, LoRA, HireFix)
+- **AI Director Tab** — Full autonomous video generation pipeline
+- **App Settings** — ComfyUI path, Python path, VLM model config
+- **Gallery Tab** — Browse generated outputs
+
+---
+
+## Removed Features (To Revisit Later)
+
+### 1. Video Tab (Long Video / Manual Extend)
+**What it was:** Manual video generation tab where user could manually queue I2V and extend workflows one at a time.
+
+**Files involved:**
+- \`src/components/LongVideoRightPanel.jsx\` — full UI panel
+- \`src/lib/workflow.js\` — \`buildWorkflow()\` for extend
+- \`src/lib/animateWorkflow.js\` — \`buildAnimateWan()\` for I2V
+- \`workflow/SVIPRO_Extend.json\`, \`workflow/AnimateWan.json\`
+
+**Why removed:** AI Director replaces this with full automation. Manual extending was tedious and error-prone. Director handles segment planning, VLM prompting, latent chain, and stitching.
+
+**To bring back:** Could return as an "Advanced" mode for power users who want manual control over each segment. Would need to integrate with the project folder system and latent chain.
+
+---
+
+### 2. Animate Image Tab
+**What it was:** Simple I2V page — drop an image, write a prompt, generate a video.
+
+**Files involved:**
+- \`src/components/AnimateImage/AnimateImagePage.jsx\`
+- \`src/lib/animateWorkflow.js\`
+- \`src/components/Studio/AnimateSettingsPopover.jsx\`
+
+**Why removed:** Overlaps with AI Director which does I2V as part of its pipeline. For standalone I2V, Director can be used with 1 segment.
+
+**To bring back:** Could return as a quick-action from Studio: "Animate This Image" button that opens a minimal dialog, not a full tab. Uses the same \`buildAnimateWan()\` under the hood.
+
+---
+
+### 3. Editor Tab (Inpainting/Overlay)
+**What it was:** Image editor using EditorOverlay workflow — select regions, write edit instructions, ComfyUI processes the edit.
+
+**Files involved:**
+- \`src/components/Editor/EditorPage.jsx\`
+- \`src/lib/editorWorkflow.js\`
+- \`workflow/EditorOverlay.json\`, \`workflow/EditorTab.json\`
+
+**Why removed:** Low usage, complex UI. Body Fix in Director uses the same workflow internally.
+
+**To bring back:** Could return as a context menu on any image in Gallery: "Edit Image" → opens inline editor. Simpler than a full tab.
+
+---
+
+### 4. LTX 2.3 Engine Support
+**What it was:** Alternative video engine using LTX 2.3 checkpoints. Separate workflow files, different node structure.
+
+**Files involved:**
+- \`src/lib/animateWorkflowLtx.js\`
+- \`workflow/AnimateLTX.json\`
+
+**Why removed:** Wan 2.2 SVI Pro is currently superior for quality. LTX support added complexity without clear benefit.
+
+**To bring back:** When LTX models improve or for specific use cases (faster generation, different style). Would need its own preset in Director settings.
+
+---
+
+### 5. Setup Wizard
+**What it was:** First-run wizard guiding users through ComfyUI path, model downloads, VLM setup.
+
+**Files involved:**
+- \`src/components/SetupWizard.jsx\`
+
+**Why removed:** Simplification. App Settings handles all configuration.
+
+**To bring back:** Useful for first-time users. Could be a modal that appears only when no ComfyUI path is configured.
+
+---
+
+### 6. Splash Screen
+**What it was:** Branded loading screen while Electron initializes.
+
+**Files involved:**
+- \`electron/splash.html\`, \`electron/splashPreload.js\`
+
+**Why removed:** Not a feature, just polish. Can add back anytime.
+
+---
+
+## Features Built But Need Refinement
+
+### 7. Web Search (Research)
+**Status:** Built with Node.js fetch to DDG Lite/HTML/API. Working but fragile.
+
+**Issues:**
+- DDG endpoints change HTML structure frequently
+- Some networks block DDG
+- Regex scraping is brittle
+
+**Future improvement:** 
+- Add Brave Search API (free tier, 2000 queries/month, proper JSON)
+- Add SearXNG self-hosted option
+- Cache results to avoid re-searching same topics
+
+---
+
+### 8. Project Folder System
+**Status:** Built — saves project.json + current.mp4 + current.latent + start_image.png per session.
+
+**Current design:**
+\`\`\`
+director_projects/{sessionId}/
+  project.json       — metadata, settings, progress
+  start_image.png    — T2I image (if generated)
+  current.mp4        — latest extended video (rolling replacement)
+  current.latent     — latest latent (rolling replacement)
+\`\`\`
+
+**Future improvement:**
+- "Continue from project" UI — list past projects, resume from last latent
+- Project browser in Gallery tab
+- Export final video with metadata embedded
+- Segment history (optional — save all intermediates toggle)
+
+---
+
+### 9. Latent Passthrough Chain
+**Status:** Built — SaveLatent/LoadLatent chain prevents VAE color degradation.
+
+**Flow:**
+\`\`\`
+I2V → SaveLatent → output/
+App grabs from output/ → project/current.latent
+App pushes to input/ → ComfyUI input/{sessionId}_latest.latent
+refreshNodeCache('LoadLatent')
+Extend → LoadLatent reads from input/ 
+\`\`\`
+
+**Key decisions:**
+- LoadLatent reads from \`input/\`, SaveLatent writes to \`output/\`
+- App is the proxy — copies between folders
+- No VAEEncode fallback — ever
+- External video resume: pickDirection "end" for first segment, "start" after
+
+---
+
+### 10. Smart LoRA System
+**Status:** Built — presets with VLM-driven selection per segment.
+
+**Design:**
+- Global scope: scanned once, applied to all segments
+- Per-segment scope: scanned before each extend
+- VLM reads description + tags, responds YES/NO
+
+**Future improvement:**
+- Auto-detect LoRAs from filename/metadata
+- LoRA strength ramping (stronger at start, fade out)
+- LoRA conflict detection
+
+---
+
+### 11. Timing Estimator
+**Status:** Built — records actual generation times, shows estimate after 2+ data points.
+
+**Tracked types:** vlm, image, i2v, extend, bodyfix, hirefix
+**Persisted:** Yes, across sessions in appdata
+
+---
+
+### 12. Prompt Templates
+**Status:** Built — 8 editable templates with variable injection.
+
+**Templates:** Research, Synthesize, Image (T2I), I2V, Extend, Plan, Plan Review, LoRA Select
+
+**Variables:** \`{intent}\`, \`{brief}\`, \`{research}\`, \`{motionStyle}\`, \`{resumeContext}\`, \`{cameraControl}\`, \`{lightingControl}\`, \`{segNum}\`, \`{totalSegs}\`, \`{segDuration}\`, \`{totalDuration}\`, \`{segsRemaining}\`, \`{planDescription}\`, \`{lastPrompt}\`, \`{hint}\`, \`{snippets}\`
+
+---
+
+### 13. Camera & Lighting Control
+**Status:** Built — injected into video prompt templates.
+
+**Camera:** static (no movement) | smart (follows action) | dynamic (cinematic)
+**Lighting:** locked (no changes) | natural (subtle shifts) | creative (mood lighting)
+
+---
+
+### 14. Two-Agent Architecture (Planner + Director)
+**Status:** Built — Planner creates segment plan, Director writes prompts with chat history.
+
+**Planner:** Single-turn VLM calls. Creates plan, reviews output (APPROVED/REJECTED), retries with feedback.
+**Director:** Multi-turn chat with image stripping for context management.
+
+---
+
+### 15. VRAM Management
+**Status:** Built — VLM stays loaded between consecutive calls, parks only before ComfyUI.
+
+**Key pattern:**
+- \`afterInference: 'keep'\` for all VLM calls
+- \`prepareForComfyUI()\` parks VLM + frees VRAM only before generation
+- \`pushLatentIfNeeded()\` runs before workflow build
+
+---
+
+## Workflow Files Reference
+
+### Keeping:
+- \`workflow/T2I.json\` — Text to Image (Studio)
+- \`workflow/HireFix.json\` — Image upscaling (Studio)
+- \`workflow/AnimateWan.json\` — I2V with SaveLatent (Director)
+- \`workflow/SVIPRO_Extend.json\` — Video extend with LoadLatent/SaveLatent (Director)
+- \`workflow/EditorOverlay.json\` — Used by Body Fix in Director
+
+### Removed:
+- \`workflow/EditorTab.json\` — Editor tab specific
+- \`workflow/AnimateLTX.json\` — LTX 2.3 engine
+
+---
+
+## Node Maps
+
+### AnimateWan (I2V)
+\`\`\`
+1(CKPT_HIGH), 2(CKPT_LOW), 3(PainterI2V), 5(Sampler1), 6(Sampler2),
+7(LoadImage), 8-9(ModelSD3), 10-11(CLIPVision), 12(VAE), 13-14(Prompts),
+15(CLIPLoader), 16(VAEDecode), 17(CreateVideo), 18(SaveVideo),
+19-20(NAG), 21-30(Resolution switches), 31(SaveLatent)
+\`\`\`
+
+### SVIPRO_Extend
+\`\`\`
+SHARED: 4(CKPT_HIGH), 19(CKPT_LOW), 23(VAE), 25(CLIP_POS), 27(CLIP_LOADER),
+30(SaveVideo), 55(CreateVideo), 56-57(SVI_PRO LoRAs), 58-59(ModelSamplingSD3),
+68(VAEDecode), 72-73(Samplers), 74(SVI_PRO), 75(CLIP_NEG), 76-82(Math)
+
+EXT: 83(LoadVideo), 88-91(Stitch chain), 92(PickFirstFrame), 93(VAEEncode anchor),
+94(LoadLatent), 95(SaveLatent)
+
+DELETED: 61(VAEEncode) — never used, causes color degradation
+\`\`\`
+
+---
+
+## Architecture Notes
+
+### App is the proxy between User ↔ VLM ↔ ComfyUI
+- User never touches ComfyUI directly
+- App manages all file movement (images, videos, latents)
+- App manages VRAM (parks VLM before ComfyUI, frees ComfyUI before VLM)
+- App manages context (chat history, image stripping, prompt templates)
+
+### Electron + React + Vite + Tailwind
+- \`electron/main.js\` — IPC handlers, ComfyUI process, file management
+- \`electron/preload.js\` — bridges renderer ↔ main
+- \`src/App.jsx\` — tab router, settings loader
+- \`src/lib/\` — stores (zustand), workflow builders, ComfyUI client, VLM client
+- \`src/components/\` — tab pages and overlays
+
+### Settings Persistence
+- All Director settings persisted with \`dir_\` prefix
+- Loaded in \`App.jsx\` via \`loadPersistedState()\`
+- Timing history persisted across sessions
+
+---
+
+*Last updated: April 15, 2026*
+*Session 4 — AI Director Build*
+`;
+document.getElementById('current').innerHTML = typeof marked !== 'undefined' ? marked.parse(CURRENT_MD) : CURRENT_MD.replace(/\n/g,'<br>');
+document.getElementById('plan').innerHTML = typeof marked !== 'undefined' ? marked.parse(PLAN_MD) : PLAN_MD.replace(/\n/g,'<br>');
+</script>
+</body>
+</html>
