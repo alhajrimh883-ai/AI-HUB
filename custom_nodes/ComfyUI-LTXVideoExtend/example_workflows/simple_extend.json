@@ -1,0 +1,289 @@
+{
+  "last_node_id": 20,
+  "last_link_id": 25,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "VHS_LoadVideo",
+      "pos": [-600, 200],
+      "size": [300, 200],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [1, 20]},
+        {"name": "frame_count", "type": "INT", "links": []},
+        {"name": "audio", "type": "AUDIO", "links": [2]},
+        {"name": "video_info", "type": "VHS_VIDEOINFO", "links": []}
+      ],
+      "title": "📹 Load Reference Video",
+      "properties": {"Node name for S&R": "VHS_LoadVideo"},
+      "widgets_values": ["input_video.mp4", "Disabled", 0, false, 0, 0, 24, false],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 2,
+      "type": "VAELoader",
+      "pos": [-600, 500],
+      "size": [250, 60],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {"name": "VAE", "type": "VAE", "links": [3, 10]}
+      ],
+      "title": "🎬 Load LTX Video VAE",
+      "properties": {"Node name for S&R": "VAELoader"},
+      "widgets_values": ["LTX23_video_vae_bf16.safetensors"],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "LTXVideoExtendFromReference",
+      "pos": [-200, 200],
+      "size": [300, 300],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "video_frames", "type": "IMAGE", "link": 1},
+        {"name": "vae", "type": "VAE", "link": 3},
+        {"name": "audio", "type": "AUDIO", "link": 2},
+        {"name": "audio_vae", "type": "VAE", "link": null}
+      ],
+      "outputs": [
+        {"name": "latent", "type": "LATENT", "links": [4]},
+        {"name": "total_frames", "type": "INT", "links": []},
+        {"name": "extension_start_frame", "type": "INT", "links": []},
+        {"name": "fps", "type": "FLOAT", "links": [11]}
+      ],
+      "title": "🔄 LTX Video Extend From Reference",
+      "properties": {"Node name for S&R": "LTXVideoExtendFromReference"},
+      "widgets_values": [5.0, 24.0, 8, "cosine", 0, 0],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [-200, -200],
+      "size": [300, 100],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [5]},
+        {"name": "CLIP", "type": "CLIP", "links": []},
+        {"name": "VAE", "type": "VAE", "links": []}
+      ],
+      "title": "🧠 Load LTX 2.3 Model",
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["ltx-2.3-22b-dev-fp8.safetensors"],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 5,
+      "type": "LoraLoaderModelOnly",
+      "pos": [200, -200],
+      "size": [300, 80],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 5}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [6]}
+      ],
+      "title": "⚡ LTX Distilled LoRA",
+      "properties": {"Node name for S&R": "LoraLoaderModelOnly"},
+      "widgets_values": ["ltx-2.3-22b-distilled-lora-384.safetensors", 1.0]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [-200, -50],
+      "size": [300, 100],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": null}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [7]}
+      ],
+      "title": "✏️ Extension Prompt (Positive)",
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["The woman continues walking through the garden, camera slowly panning right, sunlight filtering through the trees, gentle breeze moving the leaves."]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [-200, 80],
+      "size": [300, 80],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": null}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [8]}
+      ],
+      "title": "❌ Negative Prompt",
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["worst quality, blurry, jittery, inconsistent motion, watermarks, distorted"]
+    },
+    {
+      "id": 8,
+      "type": "LTXVConditioning",
+      "pos": [200, 50],
+      "size": [270, 90],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {"name": "positive", "type": "CONDITIONING", "link": 7},
+        {"name": "negative", "type": "CONDITIONING", "link": 8},
+        {"name": "frame_rate", "type": "FLOAT", "link": 11}
+      ],
+      "outputs": [
+        {"name": "positive", "type": "CONDITIONING", "links": [12]},
+        {"name": "negative", "type": "CONDITIONING", "links": [13]}
+      ],
+      "title": "🎯 LTX Conditioning",
+      "properties": {"Node name for S&R": "LTXVConditioning"}
+    },
+    {
+      "id": 10,
+      "type": "KSampler",
+      "pos": [200, 200],
+      "size": [300, 300],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 6},
+        {"name": "positive", "type": "CONDITIONING", "link": 12},
+        {"name": "negative", "type": "CONDITIONING", "link": 13},
+        {"name": "latent_image", "type": "LATENT", "link": 4}
+      ],
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [9]}
+      ],
+      "title": "🎲 Sample Extension",
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [42, "fixed", 20, 3.5, "euler", "normal", 1.0]
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": [600, 200],
+      "size": [200, 60],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 9},
+        {"name": "vae", "type": "VAE", "link": 10}
+      ],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [14]}
+      ],
+      "title": "🖼️ Decode Video",
+      "properties": {"Node name for S&R": "VAEDecode"}
+    },
+    {
+      "id": 12,
+      "type": "VHS_VideoCombine",
+      "pos": [900, 200],
+      "size": [300, 200],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 14}
+      ],
+      "outputs": [],
+      "title": "💾 Save Extended Video",
+      "properties": {"Node name for S&R": "VHS_VideoCombine"},
+      "widgets_values": ["extended_video", 24, false, "video/h264-mp4", false, true, "", "", 8]
+    },
+    {
+      "id": 20,
+      "type": "LTXVideoFrameInfo",
+      "pos": [-600, 700],
+      "size": [300, 150],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {"name": "video_frames", "type": "IMAGE", "link": 20}
+      ],
+      "outputs": [
+        {"name": "input_frames", "type": "INT", "links": []},
+        {"name": "valid_total_frames", "type": "INT", "links": []},
+        {"name": "actual_extension_frames", "type": "INT", "links": []},
+        {"name": "latent_temporal_size", "type": "INT", "links": []},
+        {"name": "actual_extension_seconds", "type": "FLOAT", "links": []},
+        {"name": "info_text", "type": "STRING", "links": []}
+      ],
+      "title": "ℹ️ Frame Info (Debug)",
+      "properties": {"Node name for S&R": "LTXVideoFrameInfo"},
+      "widgets_values": [24.0, 5.0],
+      "color": "#332",
+      "bgcolor": "#553"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 0, "IMAGE"],
+    [2, 1, 2, 3, 2, "AUDIO"],
+    [3, 2, 0, 3, 1, "VAE"],
+    [4, 3, 0, 10, 3, "LATENT"],
+    [5, 4, 0, 5, 0, "MODEL"],
+    [6, 5, 0, 10, 0, "MODEL"],
+    [7, 6, 0, 8, 0, "CONDITIONING"],
+    [8, 7, 0, 8, 1, "CONDITIONING"],
+    [9, 10, 0, 11, 0, "LATENT"],
+    [10, 2, 0, 11, 1, "VAE"],
+    [11, 3, 3, 8, 2, "FLOAT"],
+    [12, 8, 0, 10, 1, "CONDITIONING"],
+    [13, 8, 1, 10, 2, "CONDITIONING"],
+    [14, 11, 0, 12, 0, "IMAGE"],
+    [20, 1, 0, 20, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "📥 INPUT",
+      "bounding": [-650, 120, 400, 500],
+      "color": "#3f789e"
+    },
+    {
+      "title": "🧠 MODEL",
+      "bounding": [-250, -280, 700, 200],
+      "color": "#4f4f9e"
+    },
+    {
+      "title": "⚙️ EXTEND + SAMPLE",
+      "bounding": [-250, 120, 600, 500],
+      "color": "#9e3f3f"
+    },
+    {
+      "title": "💾 OUTPUT",
+      "bounding": [550, 120, 400, 350],
+      "color": "#3f9e3f"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [400, 200]
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,9 @@
+[project]
+name = "comfyui-video-latent-io"
+description = "Save/Load latent chunks for iterative SVI Pro workflows. Auto-increments on save, loads latest on load."
+version = "2.0.0"
+license = "MIT"
+
+[tool.comfy]
+PublisherId = "mohammaddev"
+DisplayName = "Video Latent IO"

@@ -1,0 +1,11 @@
+.github/workflows/publish.yml
+.gitignore
+LICENSE
+README.md
+__init__.py
+assets/comfyui-wan-vace-prep.png
+assets/icon.png
+example_workflows/comfyui-wan-vace-prep.jpg
+example_workflows/comfyui-wan-vace-prep.json
+pyproject.toml
+wan_vace_prep.py

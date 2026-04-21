@@ -1,0 +1,192 @@
+{
+    "MiniCPM_V": {
+    "display_name": "MiniCPM-V",
+    "inputs": {
+      "image": {
+        "name": "图片"
+      },
+      "video": {
+        "name": "视频"
+      },
+      "model": {
+        "name": "模型"
+      },
+      "preset_prompt": {
+        "name": "预设提示词"
+      },
+      "custom_prompt": {
+        "name": "自定义提示词"
+      },
+      "device": {
+        "name": "设备"
+      },
+      "memory_management": {
+        "name": "内存管理"
+      },
+      "seed": {
+        "name": "随机种子"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "字符串"
+      }
+    }
+  },
+  "MiniCPM_V_adv": {
+    "display_name": "MiniCPM-V（高级）",
+    "inputs": {
+      "image": {
+        "name": "图片"
+      },
+      "video": {
+        "name": "视频"
+      },
+      "model": {
+        "name": "模型"
+      },
+      "preset_prompt": {
+        "name": "预设提示词"
+      },
+      "custom_prompt": {
+        "name": "自定义提示词"
+      },
+      "system_prompt": {
+        "name": "系统提示词"
+      },
+      "max_new_tokens": {
+        "name": "最大新生成Token数"
+      },
+      "temperature": {
+        "name": "温度"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "重复惩罚"
+      },
+      "video_max_num_frames": {
+        "name": "视频最大帧数"
+      },
+      "video_max_slice_nums": {
+        "name": "视频最大切片数"
+      },
+      "device": {
+        "name": "设备"
+      },
+      "memory_management": {
+        "name": "内存管理"
+      },
+      "seed": {
+        "name": "随机种子"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "提示词"
+      },
+      "1": {
+        "name": "字符串"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF": {
+    "display_name": "MiniCPM-V GGUF",
+    "inputs": {
+      "image": {
+        "name": "图片"
+      },
+      "video": {
+        "name": "视频"
+      },
+      "model": {
+        "name": "模型"
+      },
+      "preset_prompt": {
+        "name": "预设提示词"
+      },
+      "custom_prompt": {
+        "name": "自定义提示词"
+      },
+      "device": {
+        "name": "设备"
+      },
+      "memory_management": {
+        "name": "内存管理"
+      },
+      "seed": {
+        "name": "随机种子"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "字符串"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF_adv": {
+    "display_name": "MiniCPM-V GGUF（高级）",
+    "inputs": {
+      "image": {
+        "name": "图片"
+      },
+      "video": {
+        "name": "视频"
+      },
+      "model": {
+        "name": "模型"
+      },
+      "preset_prompt": {
+        "name": "预设提示词"
+      },
+      "custom_prompt": {
+        "name": "自定义提示词"
+      },
+      "system_prompt": {
+        "name": "系统提示词"
+      },
+      "max_new_tokens": {
+        "name": "最大新生成Token数"
+      },
+      "temperature": {
+        "name": "温度"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "重复惩罚"
+      },
+      "video_max_num_frames": {
+        "name": "视频最大帧数"
+      },
+      "video_max_slice_nums": {
+        "name": "视频最大切片数"
+      },
+      "device": {
+        "name": "设备"
+      },
+      "memory_management": {
+        "name": "内存管理"
+      },
+      "seed": {
+        "name": "随机种子"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "提示词"
+      },
+      "1": {
+        "name": "字符串"
+      }
+    }
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 51,
+  "last_link_id": 77,
+  "nodes": [
+    {
+      "id": 39,
+      "type": "JC",
+      "pos": [
+        1864.2611083984375,
+        930
+      ],
+      "size": [
+        290,
+        150
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 68
+        },
+        {
+          "name": "extra_options",
+          "shape": 7,
+          "type": "JOYCAPTION_EXTRA_OPTIONS",
+          "link": 64
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            73
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "JC",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "joycaption-alpha-two",
+        "Balanced (8-bit)",
+        "Stable Diffusion Prompt",
+        "any"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 40,
+      "type": "JC_adv",
+      "pos": [
+        1864.2611083984375,
+        1260
+      ],
+      "size": [
+        290,
+        300
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 69
+        },
+        {
+          "name": "extra_options",
+          "shape": 7,
+          "type": "JOYCAPTION_EXTRA_OPTIONS",
+          "link": 65
+        }
+      ],
+      "outputs": [
+        {
+          "name": "PROMPT",
+          "type": "STRING",
+          "links": [
+            74
+          ]
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            75
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "JC_adv",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "joycaption-beta-one",
+        "Balanced (8-bit)",
+        "Descriptive",
+        "very long",
+        512,
+        0.6,
+        0.9,
+        0,
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 41,
+      "type": "JC_ExtraOptions",
+      "pos": [
+        1425.7388916015625,
+        1024
+      ],
+      "size": [
+        382.783203125,
+        736
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "extra_options",
+          "type": "JOYCAPTION_EXTRA_OPTIONS",
+          "links": [
+            64,
+            65
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "JC_ExtraOptions",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        "Amy"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 42,
+      "type": "AILab_LoadImage",
+      "pos": [
+        1020,
+        930
+      ],
+      "size": [
+        350,
+        830
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            67
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "MASK_IMAGE",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "WIDTH",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "HEIGHT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-rmbg",
+        "ver": "4faa7c7c12147db95345ee78b30f38273443ff99",
+        "widget_ue_connectable": {},
+        "Node name for S&R": "AILab_LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_jbrru_00003_.png",
+        "alpha",
+        1,
+        "longest_side",
+        0,
+        "image"
+      ]
+    },
+    {
+      "id": 43,
+      "type": "Reroute",
+      "pos": [
+        1730,
+        930
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 67
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            68,
+            69
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 47,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2210,
+        930
+      ],
+      "size": [
+        600,
+        260
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 73
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "aac13aa7ce35b07d43633c3bbe654a38c00d74f5",
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Photo of a young Asian woman walking barefoot on a city street at night, wearing a white t-shirt and high-waisted white shorts with a gold belt, short black hair, full body, long legs, slender physique, fair skin, urban setting, streetlights, blurry background, people walking, trees, plants in planters, casual attire, confident pose, high quality, jpeg artifacts"
+      ]
+    },
+    {
+      "id": 48,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2210,
+        1260
+      ],
+      "size": [
+        600,
+        170
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "aac13aa7ce35b07d43633c3bbe654a38c00d74f5",
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Write a very long detailed description for this image."
+      ]
+    },
+    {
+      "id": 49,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2210,
+        1500
+      ],
+      "size": [
+        600,
+        260
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 75
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "aac13aa7ce35b07d43633c3bbe654a38c00d74f5",
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "The image is a photograph taken at night on a bustling urban sidewalk. The central subject is an Asian woman with a slim, toned physique and medium-sized breasts. She has straight, shoulder-length black hair with bangs, and her skin tone is light. She is wearing a simple, fitted white t-shirt and matching white high-waisted shorts that accentuate her long legs. She is barefoot, walking confidently down the sidewalk, her feet slightly apart.\n\nIn the background, the sidewalk is lined with people, some of whom are blurred, indicating motion. The people are dressed in casual summer clothing, including t-shirts, shorts, and backpacks. To the left, there is a black lamppost, and to the right, a wooden planter with green foliage. The background also features a mix of storefronts with illuminated signs and trees, adding a sense of depth and urban vibrancy to the scene. The lighting is soft and warm, with streetlights and neon signs creating a cozy, late-night atmosphere. The overall composition of the photograph emphasizes the woman's poised and confident presence amidst the busy cityscape. The textures in the image range from the smoothness of her clothing to the roughness of the sidewalk and the soft glow of the streetlights."
+      ]
+    }
+  ],
+  "links": [
+    [
+      64,
+      41,
+      0,
+      39,
+      1,
+      "JOYCAPTION_EXTRA_OPTIONS"
+    ],
+    [
+      65,
+      41,
+      0,
+      40,
+      1,
+      "JOYCAPTION_EXTRA_OPTIONS"
+    ],
+    [
+      67,
+      42,
+      0,
+      43,
+      0,
+      "*"
+    ],
+    [
+      68,
+      43,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ],
+    [
+      69,
+      43,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ],
+    [
+      73,
+      39,
+      0,
+      47,
+      0,
+      "STRING"
+    ],
+    [
+      74,
+      40,
+      0,
+      48,
+      0,
+      "STRING"
+    ],
+    [
+      75,
+      40,
+      1,
+      49,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650705,
+      "offset": [
+        -175.6426170595139,
+        -471.9308396036945
+      ]
+    },
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

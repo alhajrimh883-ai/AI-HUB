@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prompt Vault Manager</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #202020; color: #eee; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        #tabs { display: flex; background: #151515; border-bottom: 2px solid #333; }
+        .tab { padding: 15px 25px; cursor: pointer; font-weight: bold; color: #888; border-bottom: 2px solid transparent; transition: 0.2s; }
+        .tab:hover { color: #fff; background: #222; }
+        .tab.active { color: #4CAF50; border-bottom: 2px solid #4CAF50; background: #202020; }
+        
+        #workspace { display: flex; flex: 1; overflow: hidden; }
+        
+        #sidebar { width: 250px; background: #2d2d2d; border-right: 1px solid #444; display: flex; flex-direction: column; }
+        #sidebar-header { padding: 15px; background: #1a1a1a; font-weight: bold; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; }
+        .list-item { padding: 12px 15px; cursor: pointer; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .list-item:hover { background: #3d3d3d; }
+        .list-item.active { background: #4CAF50; color: white; }
+        
+        .delete-btn { background: #d32f2f; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; }
+        .delete-btn:hover { background: #b71c1c; }
+        
+        #main { flex: 1; display: flex; flex-direction: column; background: #222; }
+        #main-header { padding: 15px 20px; background: #1a1a1a; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; }
+        #editor { padding: 20px; flex: 1; overflow-y: auto; }
+        
+        .prompt-box { display: flex; gap: 10px; margin-bottom: 15px; background: #2d2d2d; padding: 15px; border-radius: 6px; }
+        textarea { flex: 1; height: 80px; background: #1a1a1a; color: #fff; border: 1px solid #444; border-radius: 4px; padding: 10px; font-family: inherit; resize: vertical; }
+        
+        button { padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #45a049; }
+        .action-btn { background: #2196F3; }
+        .action-btn:hover { background: #1976D2; }
+        
+        .empty-state { text-align: center; color: #888; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div id="tabs">
+        <div class="tab active" onclick="switchTab('char')">🗃️ Characters</div>
+        <div class="tab" onclick="switchTab('clothes')">👗 Clothes</div>
+        <div class="tab" onclick="switchTab('pose')">🤸 Poses</div>
+        <div class="tab" onclick="switchTab('wildcard')">🎲 Wildcards</div>
+    </div>
+
+    <div id="workspace">
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <span id="vault-title">Characters</span>
+                <button onclick="addNew()" style="padding: 4px 8px;">+ New</button>
+            </div>
+            <div id="item-list" style="overflow-y: auto; flex: 1;"></div>
+        </div>
+
+        <div id="main">
+            <div id="main-header">
+                <h2 id="current-title" style="margin: 0; font-size: 18px;">Select an item</h2>
+                <div>
+                    <span id="status" style="margin-right: 15px; color: #4CAF50;"></span>
+                    <button onclick="saveData()">💾 Save</button>
+                </div>
+            </div>
+            <div id="editor"></div>
+        </div>
+    </div>
+
+    <script>
+        let vaultType = 'char'; 
+        let vaultData = {};
+        let currentSelection = null;
+
+        function switchTab(type) {
+            vaultType = type;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            currentSelection = null;
+            let titleText = 'Items';
+            if(type === 'char') titleText = 'Characters';
+            if(type === 'clothes') titleText = 'Clothing Styles';
+            if(type === 'pose') titleText = 'Pose Categories';
+            if(type === 'wildcard') titleText = 'Wildcard Variables';
+            document.getElementById('vault-title').innerText = titleText;
+            
+            loadData();
+        }
+
+        async function loadData() {
+            const res = await fetch(`/vault_api/get?type=${vaultType}`);
+            vaultData = await res.json();
+            renderSidebar();
+            renderEditor();
+        }
+
+        function renderSidebar() {
+            const list = document.getElementById('item-list');
+            list.innerHTML = '';
+            
+            for (const key of Object.keys(vaultData)) {
+                const div = document.createElement('div');
+                div.className = `list-item ${currentSelection === key ? 'active' : ''}`;
+                
+                const span = document.createElement('span');
+                span.innerText = key;
+                span.style.flex = "1";
+                span.onclick = () => { currentSelection = key; renderSidebar(); renderEditor(); };
+                
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-btn';
+                delBtn.innerText = 'X';
+                delBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if(confirm(`Delete ${key}?`)) {
+                        delete vaultData[key];
+                        if(currentSelection === key) currentSelection = null;
+                        renderSidebar();
+                        renderEditor();
+                    }
+                };
+
+                div.appendChild(span);
+                div.appendChild(delBtn);
+                list.appendChild(div);
+            }
+        }
+
+        function renderEditor() {
+            const editor = document.getElementById('editor');
+            const title = document.getElementById('current-title');
+            editor.innerHTML = '';
+
+            if (!currentSelection) {
+                title.innerText = "Select or create an item on the left";
+                editor.innerHTML = '<div class="empty-state">Nothing selected</div>';
+                return;
+            }
+
+            title.innerText = `Editing: ${currentSelection}`;
+
+            // Characters and Clothes both just use a single text box
+            if (vaultType === 'char' || vaultType === 'clothes') {
+                const box = document.createElement('div');
+                box.className = 'prompt-box';
+                const ta = document.createElement('textarea');
+                ta.value = vaultData[currentSelection];
+                ta.placeholder = vaultType === 'char' ? "Enter character tags here..." : "Enter clothing tags here...";
+                ta.oninput = (e) => vaultData[currentSelection] = e.target.value;
+                box.appendChild(ta);
+                editor.appendChild(box);
+            } else {
+                const prompts = vaultData[currentSelection];
+                prompts.forEach((prompt, index) => {
+                    const box = document.createElement('div');
+                    box.className = 'prompt-box';
+                    
+                    const ta = document.createElement('textarea');
+                    ta.value = prompt;
+                    ta.placeholder = vaultType === 'wildcard' ? "Enter a word (e.g. 'red')..." : "Enter pose tags here...";
+                    if(vaultType === 'wildcard') ta.style.height = '30px';
+                    
+                    ta.oninput = (e) => vaultData[currentSelection][index] = e.target.value;
+                    
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'delete-btn';
+                    delBtn.innerText = 'Remove';
+                    delBtn.onclick = () => {
+                        vaultData[currentSelection].splice(index, 1);
+                        renderEditor();
+                    };
+
+                    box.appendChild(ta);
+                    box.appendChild(delBtn);
+                    editor.appendChild(box);
+                });
+
+                const addBtn = document.createElement('button');
+                addBtn.className = 'action-btn';
+                addBtn.innerText = vaultType === 'wildcard' ? '+ Add Word' : '+ Add Prompt';
+                addBtn.onclick = () => {
+                    vaultData[currentSelection].push("");
+                    renderEditor();
+                };
+                editor.appendChild(addBtn);
+            }
+        }
+
+        function addNew() {
+            let promptText = vaultType === 'wildcard' ? "Enter new variable name (e.g. 'color'):" : "Enter new name:";
+            const name = prompt(promptText);
+            if (name && !vaultData[name]) {
+                // Char and Clothes get strings, the others get lists
+                vaultData[name] = (vaultType === 'char' || vaultType === 'clothes') ? "" : [""];
+                currentSelection = name;
+                renderSidebar();
+                renderEditor();
+            } else if (vaultData[name]) {
+                alert("That name already exists!");
+            }
+        }
+
+        async function saveData() {
+            const status = document.getElementById('status');
+            status.innerText = "Saving...";
+            try {
+                await fetch('/vault_api/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: vaultType, data: vaultData })
+                });
+                status.innerText = "Saved successfully!";
+                setTimeout(() => status.innerText = "", 3000);
+            } catch (e) {
+                status.innerText = "Error saving!";
+                status.style.color = "red";
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+vendor/ckpts/
+*.pth
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.tox/
+.nox/
+.cache/
+
+# Logs / temp
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.iml

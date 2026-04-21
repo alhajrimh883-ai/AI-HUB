@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# ComfyUI specific
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+models/
+input/
+output/
+temp/
+
+# Logs
+*.log
+
+# Test files
+test_*.py
+tests/
+
+TODO.md

@@ -1,0 +1,8 @@
+[project]
+name = "comfyui-vlm-video-sampler"
+description = "All-in-one video frame sampling + Qwen2-VL analysis node for ComfyUI. Uniformly samples frames, runs VLM inference, and displays results."
+version = "1.0.0"
+license = "MIT"
+
+[project.urls]
+Repository = "https://github.com/placeholder/ComfyUI-VLM-Video-Sampler"

@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-wan-vace-prep"
+description = "A ComfyUI node that generates a VACE control video and mask for a smooth transition between two videos."
+version = "1.0.5"
+license = { text = "MIT" }
+
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/stuttlepress/ComfyUI-Wan-VACE-Prep"
+
+[tool.comfy]
+PublisherId = "stuttlepress"
+DisplayName = "ComfyUI Wan VACE Prep"
+Icon = "https://raw.githubusercontent.com/stuttlepress/ComfyUI-Wan-VACE-Prep/main/assets/icon.png"

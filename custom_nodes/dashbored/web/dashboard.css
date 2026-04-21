@@ -1,0 +1,16 @@
+#dashboard-ui-panel button {
+  background: #222;
+  border: 1px solid #444;
+  color: #eee;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+#dashboard-ui-panel button:hover {
+  border-color: #666;
+}
+#dashboard-ui-panel input, #dashboard-ui-panel select {
+  background: #151515;
+  border: 1px solid #333;
+  color: #eee;
+  padding: 6px 8px;
+}

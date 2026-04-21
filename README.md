@@ -59,6 +59,49 @@ Browse generated, imported, and Director project content.
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI) running locally
 - An NVIDIA GPU with CUDA for VLM inference (8 GB+ recommended)
 
+## ⚠️ Important — Install the bundled custom nodes first
+
+The workflows in this repo rely on a set of ComfyUI custom nodes (Wan-SVI2Pro-FLF, PainterI2Vadvanced, PainterLongVideo, KJNodes, rgthree, Easy-Use, Comfyroll, VideoHelperSuite, MTB, Crystools, WanVideoWrapper, and more). All of them ship inside the repo's `custom_nodes/` folder.
+
+**Before running the app, move the contents of `custom_nodes/` into your ComfyUI `custom_nodes/` folder.**
+
+**Skip any pack that already exists** on your ComfyUI side — do *not* overwrite it. Your existing version may be newer or contain local changes, and overwriting can break your setup.
+
+### Windows (PowerShell) — skip-if-exists copy
+
+```powershell
+$src = "custom_nodes"
+$dst = "C:\path\to\ComfyUI\custom_nodes"   # ← change this
+Get-ChildItem $src -Directory | Where-Object {
+    $_.Name -ne "__pycache__" -and -not (Test-Path (Join-Path $dst $_.Name))
+} | ForEach-Object {
+    Copy-Item -Recurse -Path $_.FullName -Destination $dst
+    Write-Host "Copied: $($_.Name)"
+}
+```
+
+### macOS / Linux (bash) — skip-if-exists copy
+
+```bash
+SRC="custom_nodes"
+DST="/path/to/ComfyUI/custom_nodes"   # ← change this
+for d in "$SRC"/*/; do
+  name=$(basename "$d")
+  [ "$name" = "__pycache__" ] && continue
+  if [ -e "$DST/$name" ]; then
+    echo "Skip (already exists): $name"
+  else
+    cp -r "$d" "$DST/" && echo "Copied: $name"
+  fi
+done
+```
+
+### Manual (drag-and-drop)
+
+Open `custom_nodes/` in one window and your `ComfyUI/custom_nodes/` in another, then drag the subfolders over. When Windows/macOS asks to merge or replace an existing folder, **choose Skip / Don't replace**.
+
+After copying, start ComfyUI once so it installs each pack's Python dependencies, then come back and launch AI-HUB.
+
 ## Quick start
 
 ```bash
@@ -99,6 +142,8 @@ src/
                     smart-select, VLM auto-optimize, clipboard, first-run installer
 tests/              Vitest unit tests for pure logic modules
 workflow/           ComfyUI workflow JSON templates (T2I, Edit, HireFix, I2V, etc.)
+custom_nodes/       ComfyUI custom-node packs used by the workflows
+                    (copy into ComfyUI/custom_nodes — skip folders that already exist)
 vlm_server.py       FastAPI VLM inference server (llama-cpp-python)
 voice_server.py     FastAPI voice server (Whisper STT + Kokoro/Piper TTS)
 ```

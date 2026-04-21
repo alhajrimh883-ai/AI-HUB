@@ -1,0 +1,192 @@
+{
+    "MiniCPM_V": {
+    "display_name": "MiniCPM-V",
+    "inputs": {
+      "image": {
+        "name": "image"
+      },
+      "video": {
+        "name": "video"
+      },
+      "model": {
+        "name": "model"
+      },
+      "preset_prompt": {
+        "name": "preset_prompt"
+      },
+      "custom_prompt": {
+        "name": "custom_prompt"
+      },
+      "device": {
+        "name": "device"
+      },
+      "memory_management": {
+        "name": "memory_management"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "STRING"
+      }
+    }
+  },
+  "MiniCPM_V_adv": {
+    "display_name": "MiniCPM-V (Advanced)",
+    "inputs": {
+      "image": {
+        "name": "image"
+      },
+      "video": {
+        "name": "video"
+      },
+      "model": {
+        "name": "model"
+      },
+      "preset_prompt": {
+        "name": "preset_prompt"
+      },
+      "custom_prompt": {
+        "name": "custom_prompt"
+      },
+      "system_prompt": {
+        "name": "system_prompt"
+      },
+      "max_new_tokens": {
+        "name": "max_new_tokens"
+      },
+      "temperature": {
+        "name": "temperature"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "repetition_penalty"
+      },
+      "video_max_num_frames": {
+        "name": "video_max_num_frames"
+      },
+      "video_max_slice_nums": {
+        "name": "video_max_slice_nums"
+      },
+      "device": {
+        "name": "device"
+      },
+      "memory_management": {
+        "name": "memory_management"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "PROMPT"
+      },
+      "1": {
+        "name": "STRING"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF": {
+    "display_name": "MiniCPM-V GGUF",
+    "inputs": {
+      "image": {
+        "name": "image"
+      },
+      "video": {
+        "name": "video"
+      },
+      "model": {
+        "name": "model"
+      },
+      "preset_prompt": {
+        "name": "preset_prompt"
+      },
+      "custom_prompt": {
+        "name": "custom_prompt"
+      },
+      "device": {
+        "name": "device"
+      },
+      "memory_management": {
+        "name": "memory_management"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "STRING"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF_adv": {
+    "display_name": "MiniCPM-V GGUF (Advanced)",
+    "inputs": {
+      "image": {
+        "name": "image"
+      },
+      "video": {
+        "name": "video"
+      },
+      "model": {
+        "name": "model"
+      },
+      "preset_prompt": {
+        "name": "preset_prompt"
+      },
+      "custom_prompt": {
+        "name": "custom_prompt"
+      },
+      "system_prompt": {
+        "name": "system_prompt"
+      },
+      "max_new_tokens": {
+        "name": "max_new_tokens"
+      },
+      "temperature": {
+        "name": "temperature"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "repetition_penalty"
+      },
+      "video_max_num_frames": {
+        "name": "video_max_num_frames"
+      },
+      "video_max_slice_nums": {
+        "name": "video_max_slice_nums"
+      },
+      "device": {
+        "name": "device"
+      },
+      "memory_management": {
+        "name": "memory_management"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "PROMPT"
+      },
+      "1": {
+        "name": "STRING"
+      }
+    }
+  }
+}

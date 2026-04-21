@@ -1,0 +1,11 @@
+.github/workflows/publish.yml
+.gitignore
+LICENSE.txt
+README.md
+__init__.py
+install.py
+modules/subcore.py
+modules/subpack_nodes.py
+modules/utils.py
+pyproject.toml
+requirements.txt

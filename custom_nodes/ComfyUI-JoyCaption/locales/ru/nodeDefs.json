@@ -1,0 +1,192 @@
+{
+    "MiniCPM_V": {
+    "display_name": "MiniCPM-V",
+    "inputs": {
+      "image": {
+        "name": "изображение"
+      },
+      "video": {
+        "name": "видео"
+      },
+      "model": {
+        "name": "модель"
+      },
+      "preset_prompt": {
+        "name": "предустановленный_промпт"
+      },
+      "custom_prompt": {
+        "name": "пользовательский_промпт"
+      },
+      "device": {
+        "name": "устройство"
+      },
+      "memory_management": {
+        "name": "управление_памятью"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "СТРОКА"
+      }
+    }
+  },
+  "MiniCPM_V_adv": {
+    "display_name": "MiniCPM-V (Расширенный)",
+    "inputs": {
+      "image": {
+        "name": "изображение"
+      },
+      "video": {
+        "name": "видео"
+      },
+      "model": {
+        "name": "модель"
+      },
+      "preset_prompt": {
+        "name": "предустановленный_промпт"
+      },
+      "custom_prompt": {
+        "name": "пользовательский_промпт"
+      },
+      "system_prompt": {
+        "name": "системный_промпт"
+      },
+      "max_new_tokens": {
+        "name": "макс_новых_токенов"
+      },
+      "temperature": {
+        "name": "температура"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "штраф_за_повтор"
+      },
+      "video_max_num_frames": {
+        "name": "макс_кадров_видео"
+      },
+      "video_max_slice_nums": {
+        "name": "макс_срезов_видео"
+      },
+      "device": {
+        "name": "устройство"
+      },
+      "memory_management": {
+        "name": "управление_памятью"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "ПРОМПТ"
+      },
+      "1": {
+        "name": "СТРОКА"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF": {
+    "display_name": "MiniCPM-V GGUF",
+    "inputs": {
+      "image": {
+        "name": "изображение"
+      },
+      "video": {
+        "name": "видео"
+      },
+      "model": {
+        "name": "модель"
+      },
+      "preset_prompt": {
+        "name": "предустановленный_промпт"
+      },
+      "custom_prompt": {
+        "name": "пользовательский_промпт"
+      },
+      "device": {
+        "name": "устройство"
+      },
+      "memory_management": {
+        "name": "управление_памятью"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "СТРОКА"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF_adv": {
+    "display_name": "MiniCPM-V GGUF (Расширенный)",
+    "inputs": {
+      "image": {
+        "name": "изображение"
+      },
+      "video": {
+        "name": "видео"
+      },
+      "model": {
+        "name": "модель"
+      },
+      "preset_prompt": {
+        "name": "предустановленный_промпт"
+      },
+      "custom_prompt": {
+        "name": "пользовательский_промпт"
+      },
+      "system_prompt": {
+        "name": "системный_промпт"
+      },
+      "max_new_tokens": {
+        "name": "макс_новых_токенов"
+      },
+      "temperature": {
+        "name": "температура"
+      },
+      "top_p": {
+        "name": "top_p"
+      },
+      "top_k": {
+        "name": "top_k"
+      },
+      "repetition_penalty": {
+        "name": "штраф_за_повтор"
+      },
+      "video_max_num_frames": {
+        "name": "макс_кадров_видео"
+      },
+      "video_max_slice_nums": {
+        "name": "макс_срезов_видео"
+      },
+      "device": {
+        "name": "устройство"
+      },
+      "memory_management": {
+        "name": "управление_памятью"
+      },
+      "seed": {
+        "name": "seed"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "ПРОМПТ"
+      },
+      "1": {
+        "name": "СТРОКА"
+      }
+    }
+  }
+}

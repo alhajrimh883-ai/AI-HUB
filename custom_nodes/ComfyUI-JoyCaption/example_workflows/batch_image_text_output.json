@@ -1,0 +1,342 @@
+{
+  "id": "d7f22f6a-de79-4884-b925-2621f86c6dc6",
+  "revision": 0,
+  "last_node_id": 11,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "JC_adv",
+      "pos": [
+        1043.3333740234375,
+        0
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "name": "extra_options",
+          "shape": 7,
+          "type": "JOYCAPTION_EXTRA_OPTIONS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "PROMPT",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "JC_adv",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "joycaption-beta-one",
+        "Maximum Savings (4-bit)",
+        "Descriptive",
+        "short",
+        512,
+        0.6,
+        0.9,
+        0,
+        "",
+        "Keep in Memory"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "CaptionSaver",
+      "pos": [
+        1870,
+        -80
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "link": 7
+        },
+        {
+          "name": "image_path",
+          "type": "STRING",
+          "link": 5
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 11
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "CaptionSaver",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "C:\\Images\\JC",
+        "JC_img",
+        false
+      ]
+    },
+    {
+      "id": 9,
+      "type": "ImageBatchPath",
+      "pos": [
+        630,
+        -60
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE_PATH",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "IMAGE",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": [
+            8,
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "Node name for S&R": "ImageBatchPath",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "C:\\Images",
+        0,
+        1,
+        "sequential"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1456.6666259765625,
+        0
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "aac13aa7ce35b07d43633c3bbe654a38c00d74f5",
+        "Node name for S&R": "ShowText|pysssss",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "Monochromatic digital drawing of a young woman with wavy, shoulder-length blonde hair, wearing a white collared shirt. She has a serene expression, large eyes, and subtle makeup. The background is a gradient grey, emphasizing her delicate features. The style is realistic with smooth textures and fine lines.",
+        "Digital grayscale portrait of a young woman with wavy, shoulder-length hair, light skin, and delicate features. She wears a simple necklace, long earrings, and a sleeveless top. Her expression is calm and confident, with subtle shadows enhancing her facial contours. The background is a smooth gradient.",
+        "Digital black-and-white portrait of a young, handsome man with short, slightly tousled hair, light stubble, and serious expression. He wears a collared shirt with visible buttons, set against a plain grey background. The detailed shading and realistic texture emphasize his facial features and subtle skin texture.",
+        "Realistic black-and-white digital portrait of an elderly man with wavy, gray hair, a trimmed beard, and deep wrinkles. He wears a collared shirt with a zip-up jacket. The background is a plain, light gray gradient. The detailed texture highlights his aged skin and expressive eyes, creating a lifelike, somber effect."
+      ]
+    },
+    {
+      "id": 11,
+      "type": "AILab_ImagePreview",
+      "pos": [
+        1043.3333740234375,
+        -380
+      ],
+      "size": [
+        810,
+        330
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "cnr_id": "comfyui-rmbg",
+        "ver": "4faa7c7c12147db95345ee78b30f38273443ff99",
+        "Node name for S&R": "AILab_ImagePreview",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [],
+      "color": "#2e3e57",
+      "bgcolor": "#4b5b73"
+    }
+  ],
+  "links": [
+    [
+      5,
+      9,
+      0,
+      8,
+      1,
+      "STRING"
+    ],
+    [
+      6,
+      3,
+      1,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      10,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      8,
+      9,
+      1,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      9,
+      1,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      11,
+      11,
+      0,
+      8,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 1.1,
+      "offset": [
+        -426.39108664271225,
+        429.69494560776803
+      ]
+    },
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

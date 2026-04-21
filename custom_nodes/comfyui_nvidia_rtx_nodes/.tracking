@@ -1,0 +1,12 @@
+.github/workflows/publish_node.yml
+.gitignore
+LICENSE
+README.md
+__init__.py
+example_workflows/rtx_image_upscale.jpg
+example_workflows/rtx_image_upscale.json
+example_workflows/rtx_video_upscale.jpg
+example_workflows/rtx_video_upscale.json
+icon.png
+pyproject.toml
+requirements.txt

@@ -1,0 +1,13 @@
+[project]
+name = "Wan-SVI2Pro-FLF"
+description = "First/Last Frame control for SVI 2 PRO"
+version = "1.2.1"
+license = { file = "LICENSE" }
+
+[project.urls]
+Repository = "https://github.com/Well-Made/ComfyUI-Wan-SVI2Pro-FLF"
+
+[tool.comfy]
+PublisherId = "well-made"
+DisplayName = "Wan-SVI2Pro-FLF"
+Icon = ""

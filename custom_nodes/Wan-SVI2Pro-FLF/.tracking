@@ -1,0 +1,14 @@
+.github/workflows/publish_action.yml
+.gitignore
+LICENSE
+README.md
+__init__.py
+__pycache__/__init__.cpython-313.pyc
+__pycache__/nodes.cpython-313.pyc
+nodes.py
+pyproject.toml
+workflows/ImageToVideoSVI2Pro_PromptOnly.json
+workflows/SVI2PRO_FLF_Video_Extension.json
+workflows/SVI2PRO_FLF_Video_Extension_SamplerCustomAdvanced.json
+workflows/SVI2PRO_VideoExtension_PromptOnly.json
+workflows/WanImageToVideoSVIProFLF_SamplerCustomAdvanced.json

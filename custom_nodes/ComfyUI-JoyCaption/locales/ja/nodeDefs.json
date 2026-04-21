@@ -1,0 +1,192 @@
+{
+    "MiniCPM_V": {
+    "display_name": "MiniCPM-V",
+    "inputs": {
+      "image": {
+        "name": "画像"
+      },
+      "video": {
+        "name": "ビデオ"
+      },
+      "model": {
+        "name": "モデル"
+      },
+      "preset_prompt": {
+        "name": "プリセットプロンプト"
+      },
+      "custom_prompt": {
+        "name": "カスタムプロンプト"
+      },
+      "device": {
+        "name": "デバイス"
+      },
+      "memory_management": {
+        "name": "メモリ管理"
+      },
+      "seed": {
+        "name": "シード"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "文字列"
+      }
+    }
+  },
+  "MiniCPM_V_adv": {
+    "display_name": "MiniCPM-V（上級）",
+    "inputs": {
+      "image": {
+        "name": "画像"
+      },
+      "video": {
+        "name": "ビデオ"
+      },
+      "model": {
+        "name": "モデル"
+      },
+      "preset_prompt": {
+        "name": "プリセットプロンプト"
+      },
+      "custom_prompt": {
+        "name": "カスタムプロンプト"
+      },
+      "system_prompt": {
+        "name": "システムプロンプト"
+      },
+      "max_new_tokens": {
+        "name": "最大新規トークン数"
+      },
+      "temperature": {
+        "name": "温度"
+      },
+      "top_p": {
+        "name": "トップP"
+      },
+      "top_k": {
+        "name": "トップK"
+      },
+      "repetition_penalty": {
+        "name": "繰り返しペナルティ"
+      },
+      "video_max_num_frames": {
+        "name": "ビデオ最大フレーム数"
+      },
+      "video_max_slice_nums": {
+        "name": "ビデオ最大スライス数"
+      },
+      "device": {
+        "name": "デバイス"
+      },
+      "memory_management": {
+        "name": "メモリ管理"
+      },
+      "seed": {
+        "name": "シード"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "プロンプト"
+      },
+      "1": {
+        "name": "文字列"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF": {
+    "display_name": "MiniCPM-V GGUF",
+    "inputs": {
+      "image": {
+        "name": "画像"
+      },
+      "video": {
+        "name": "ビデオ"
+      },
+      "model": {
+        "name": "モデル"
+      },
+      "preset_prompt": {
+        "name": "プリセットプロンプト"
+      },
+      "custom_prompt": {
+        "name": "カスタムプロンプト"
+      },
+      "device": {
+        "name": "デバイス"
+      },
+      "memory_management": {
+        "name": "メモリ管理"
+      },
+      "seed": {
+        "name": "シード"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "文字列"
+      }
+    }
+  },
+  "MiniCPM_V_GGUF_adv": {
+    "display_name": "MiniCPM-V GGUF（上級）",
+    "inputs": {
+      "image": {
+        "name": "画像"
+      },
+      "video": {
+        "name": "ビデオ"
+      },
+      "model": {
+        "name": "モデル"
+      },
+      "preset_prompt": {
+        "name": "プリセットプロンプト"
+      },
+      "custom_prompt": {
+        "name": "カスタムプロンプト"
+      },
+      "system_prompt": {
+        "name": "システムプロンプト"
+      },
+      "max_new_tokens": {
+        "name": "最大新規トークン数"
+      },
+      "temperature": {
+        "name": "温度"
+      },
+      "top_p": {
+        "name": "トップP"
+      },
+      "top_k": {
+        "name": "トップK"
+      },
+      "repetition_penalty": {
+        "name": "繰り返しペナルティ"
+      },
+      "video_max_num_frames": {
+        "name": "ビデオ最大フレーム数"
+      },
+      "video_max_slice_nums": {
+        "name": "ビデオ最大スライス数"
+      },
+      "device": {
+        "name": "デバイス"
+      },
+      "memory_management": {
+        "name": "メモリ管理"
+      },
+      "seed": {
+        "name": "シード"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "プロンプト"
+      },
+      "1": {
+        "name": "文字列"
+      }
+    }
+  }
+}
