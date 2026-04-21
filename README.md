@@ -63,24 +63,26 @@ Browse generated, imported, and Director project content.
 
 The workflows in this repo rely on a set of ComfyUI custom nodes (Wan-SVI2Pro-FLF, PainterI2Vadvanced, PainterLongVideo, KJNodes, rgthree, Easy-Use, Comfyroll, VideoHelperSuite, MTB, Crystools, WanVideoWrapper, and more). All of them ship inside the repo's `custom_nodes/` folder.
 
-**Before running the app, move the contents of `custom_nodes/` into your ComfyUI `custom_nodes/` folder.**
+Follow these two steps in order — doing them in this order avoids version-mismatch conflicts between packs you may already have installed and the ones bundled here.
 
-**Skip any pack that already exists** on your ComfyUI side — do *not* overwrite it. Your existing version may be newer or contain local changes, and overwriting can break your setup.
+### Step 1 — Copy the folder into ComfyUI (replace when prompted)
 
-### Windows (PowerShell) — skip-if-exists copy
+Move every subfolder inside the repo's `custom_nodes/` into your `ComfyUI/custom_nodes/` directory.
+
+**If you already have one of the packs installed, choose Replace / Overwrite.** This keeps everyone on a single known-good baseline. Don't worry about losing updates — Step 2 pulls the latest version of every pack.
+
+**Windows (PowerShell):**
 
 ```powershell
 $src = "custom_nodes"
 $dst = "C:\path\to\ComfyUI\custom_nodes"   # ← change this
-Get-ChildItem $src -Directory | Where-Object {
-    $_.Name -ne "__pycache__" -and -not (Test-Path (Join-Path $dst $_.Name))
-} | ForEach-Object {
-    Copy-Item -Recurse -Path $_.FullName -Destination $dst
+Get-ChildItem $src -Directory | Where-Object { $_.Name -ne "__pycache__" } | ForEach-Object {
+    Copy-Item -Recurse -Force -Path $_.FullName -Destination $dst
     Write-Host "Copied: $($_.Name)"
 }
 ```
 
-### macOS / Linux (bash) — skip-if-exists copy
+**macOS / Linux (bash):**
 
 ```bash
 SRC="custom_nodes"
@@ -88,19 +90,24 @@ DST="/path/to/ComfyUI/custom_nodes"   # ← change this
 for d in "$SRC"/*/; do
   name=$(basename "$d")
   [ "$name" = "__pycache__" ] && continue
-  if [ -e "$DST/$name" ]; then
-    echo "Skip (already exists): $name"
-  else
-    cp -r "$d" "$DST/" && echo "Copied: $name"
-  fi
+  cp -rf "$d" "$DST/" && echo "Copied: $name"
 done
 ```
 
-### Manual (drag-and-drop)
+**Manual (drag-and-drop):** open both folders side-by-side, drag all subfolders over. When the OS asks about existing folders, choose **Replace / Merge**.
 
-Open `custom_nodes/` in one window and your `ComfyUI/custom_nodes/` in another, then drag the subfolders over. When Windows/macOS asks to merge or replace an existing folder, **choose Skip / Don't replace**.
+### Step 2 — Start ComfyUI and update every node from the Manager
 
-After copying, start ComfyUI once so it installs each pack's Python dependencies, then come back and launch AI-HUB.
+This is the important part — **do not skip it**.
+
+1. Launch ComfyUI (so it can install each pack's Python dependencies on first run).
+2. Open **ComfyUI Manager** (the Manager button in the main UI).
+3. Click **"Update All"** (or "Update All Custom Nodes").
+4. When it finishes, **restart ComfyUI**.
+
+Updating through the Manager reconciles every pack to its latest working version and fixes any file conflicts introduced by the copy in Step 1. This is why overwriting in Step 1 is safe — Step 2 brings everything back to a clean, up-to-date state.
+
+Once ComfyUI restarts cleanly, launch AI-HUB.
 
 ## Quick start
 
@@ -143,7 +150,8 @@ src/
 tests/              Vitest unit tests for pure logic modules
 workflow/           ComfyUI workflow JSON templates (T2I, Edit, HireFix, I2V, etc.)
 custom_nodes/       ComfyUI custom-node packs used by the workflows
-                    (copy into ComfyUI/custom_nodes — skip folders that already exist)
+                    (copy into ComfyUI/custom_nodes, replacing existing folders,
+                    then run Manager → Update All to reconcile versions)
 vlm_server.py       FastAPI VLM inference server (llama-cpp-python)
 voice_server.py     FastAPI voice server (Whisper STT + Kokoro/Piper TTS)
 ```
