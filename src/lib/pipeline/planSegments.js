@@ -4,7 +4,7 @@
 // Input shape (all optional, but the combination matters):
 //   hasImage         — user supplied a start image
 //   hasVideo         — user supplied an existing video to extend
-//   t2iCheckpoint    — a T2I checkpoint is configured (required when no image/video)
+//   hasT2IPreset     — a T2I preset is selected for the current mode (required when no image/video)
 //   targetLength     — requested video length in seconds
 //   segmentDuration  — how many seconds each I2V/extend produces
 //   resetEnabled     — SVI FLF reset toggle
@@ -15,7 +15,7 @@
 export function planSegments({
   hasImage,
   hasVideo,
-  t2iCheckpoint,
+  hasT2IPreset,
   targetLength,
   segmentDuration,
   resetEnabled,
@@ -27,8 +27,8 @@ export function planSegments({
   let extendCount = totalVideoSegs; // default: all extends (user provided video)
 
   if (!hasImage && !hasVideo) {
-    if (!t2iCheckpoint) {
-      return { error: 'Select a T2I checkpoint in Settings, or provide an image/video to start from.' };
+    if (!hasT2IPreset) {
+      return { error: 'Select a T2I preset for the current mode in the Presets tab, or provide an image/video to start from.' };
     }
     segments.push({ id: 0, type: 'image', status: 'pending', prompt: '', result: null });
     segments.push({ id: 1, type: 'i2v', status: 'pending', prompt: '', result: null });

@@ -114,7 +114,7 @@ export async function runPipeline(ds, vs, wsRef, addLog) {
     // Build segment plan (extracted to pipeline/planSegments.js for testability)
     const plan = planSegments({
       hasImage, hasVideo,
-      t2iCheckpoint: s.t2iCheckpoint,
+      hasT2IPreset: !!t2iPreset,
       targetLength: s.targetLength,
       segmentDuration: s.segmentDuration,
       resetEnabled: s.resetEnabled,
@@ -599,7 +599,7 @@ Respond with EXACTLY one word: YES or NO`;
           projectPath, fileName: sessionId,
           latentPrefix: `latents/${sessionId}`, videoPrefix: `video/${sessionId}`,
           latentName: pushed.latentName, videoName: pushed.videoName,
-          useEndSamples: true, endImageName: originalImageName,
+          useEndSamples: true,
           qualityPreset: mode, settings: extPreset.settings,
           ckptHigh: extPreset.models?.ckptHigh, ckptLow: extPreset.models?.ckptLow,
           clipModel: extPreset.models?.clip, vaeModel: extPreset.models?.vae,

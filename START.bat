@@ -6,7 +6,7 @@ cd /d "%~dp0"
 
 echo.
 echo  ========================================
-echo    WAN VIDEO STUDIO (Debug Console)
+echo    AI-HUB (Debug Console)
 echo  ========================================
 echo.
 

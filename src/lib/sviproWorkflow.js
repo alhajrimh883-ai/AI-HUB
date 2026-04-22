@@ -160,8 +160,7 @@ const EXT = {
   SAVE_VIDEO:       '149',     // SaveVideo → output/video/
   TRIM_OUTPUT:      '150',     // Pick From Batch end count=76 (trims overlap frames)
   SVI_PRO:          '151',     // WanImageToVideoSVIProFLF (replaces 87:88)
-  END_VAE_ENCODE:   '152',     // VAEEncode for end frame target
-  END_IMAGE:        '153',     // LoadImage for end frame target
+  END_VAE_ENCODE:   '152',     // VAEEncode for end frame target (pixels from node 124 — first frame of accumulated video)
   USE_END_SAMPLES:  '154',     // easy boolean — enable last frame control
   SAMPLER_HIGH:     '87:5',    // model from ModelSD3 HIGH (122)
   SAMPLER_LOW:      '87:6',    // model from ModelSD3 LOW (119)
@@ -192,10 +191,11 @@ export function buildExtend(params) {
   // Pick direction no longer needed — first frame picked by node 124 for anchor
 
   // End frame control (WanImageToVideoSVIProFLF)
-  // When enabled, SVI PRO guides generation toward the end_samples target
+  // end_samples is wired directly from the accumulated video's first frame in
+  // Extend.json, which is the original project frame — so the boolean gate
+  // alone controls whether SVI PRO steers back to the start.
   if (params.useEndSamples) {
     wf[EXT.USE_END_SAMPLES].inputs.value = true;
-    if (params.endImageName) wf[EXT.END_IMAGE].inputs.image = params.endImageName;
   }
 
   // Steps, CFG, Shift (preset settings override fallback defaults)

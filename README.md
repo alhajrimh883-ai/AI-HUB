@@ -168,6 +168,17 @@ npm test
 
 226 tests covering workflow builders, preset resolution, smart-select, chat pipeline, Director segment planning, voice store, VLM auto-optimize profiles, and the first-run installer.
 
+## Changelog
+
+Legend: **[Fixed]** bug fix · **[New]** feature or behavior addition · **[Changed]** refactor or behavior change that isn't a bug fix · **[Removed]** feature or API removed.
+
+### Unreleased
+
+- **[Fixed]** AI Director threw *"Select a T2I checkpoint in Settings, or provide an image/video to start from"* even when a T2I preset was configured. The segment planner now checks for a selected T2I preset instead of the legacy raw-checkpoint field.
+- **[Fixed]** Extend workflow failed on the first extend with `Invalid image file: (1).png`. The `LoadImage` node for the end frame has been removed and `end_samples` now feeds from the accumulated video's first frame directly — Periodic Reset still steers back to the original project frame, gated by the existing boolean.
+- **[Fixed]** App header and debug-console banner displayed *"WAN VIDEO STUDIO"* instead of *AI-HUB*.
+- **[New]** Bundled `custom_nodes/` folder shipping every ComfyUI pack the workflows rely on, with install instructions in the README (copy into `ComfyUI/custom_nodes`, then run **Manager → Update All** to reconcile versions).
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).

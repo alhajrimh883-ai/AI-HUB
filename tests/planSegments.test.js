@@ -14,16 +14,16 @@ describe('planSegments', () => {
     resetInterval: 0,
   };
 
-  it('errors when no input and no T2I checkpoint', () => {
-    const r = planSegments({ ...base, hasImage: false, hasVideo: false, t2iCheckpoint: '' });
-    expect(r.error).toMatch(/T2I checkpoint/i);
+  it('errors when no input and no T2I preset is selected', () => {
+    const r = planSegments({ ...base, hasImage: false, hasVideo: false, hasT2IPreset: false });
+    expect(r.error).toMatch(/T2I preset/i);
     expect(r.segments).toBeUndefined();
   });
 
   it('text-only start: image then i2v then extends', () => {
     // targetLength 10, segmentDuration 5 → totalVideoSegs = 2.
     // image + i2v consumes 1 video seg, so extends = 1.
-    const r = planSegments({ ...base, hasImage: false, hasVideo: false, t2iCheckpoint: 'sdxl.safetensors' });
+    const r = planSegments({ ...base, hasImage: false, hasVideo: false, hasT2IPreset: true });
     expect(r.error).toBeUndefined();
     const types = r.segments.map(s => s.type);
     expect(types).toEqual(['image', 'i2v', 'extend']);
@@ -81,7 +81,7 @@ describe('planSegments', () => {
   });
 
   it('every segment has the expected shape', () => {
-    const r = planSegments({ ...base, hasImage: false, hasVideo: false, t2iCheckpoint: 'x' });
+    const r = planSegments({ ...base, hasImage: false, hasVideo: false, hasT2IPreset: true });
     for (const seg of r.segments) {
       expect(seg).toHaveProperty('id');
       expect(seg).toHaveProperty('type');

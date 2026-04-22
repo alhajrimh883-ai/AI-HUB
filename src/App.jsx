@@ -202,7 +202,7 @@ export default function App() {
       <div className="h-10 flex items-center px-4 border-b border-surface-border bg-bg-800 shrink-0 drag select-none">
         <div className="flex items-center gap-2 no-drag">
           <Zap size={14} className="text-accent" />
-          <span className="text-xs font-bold tracking-wide">WAN VIDEO STUDIO</span>
+          <span className="text-xs font-bold tracking-wide">AI-HUB</span>
           <button onClick={() => setShowLogs(!showLogs)}
             className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] transition-colors ml-2 ${
               showLogs ? 'bg-accent/20 text-accent' : 'text-neutral-600 hover:text-neutral-400'}`}>
